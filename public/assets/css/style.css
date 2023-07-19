@@ -1,0 +1,615 @@
+* {
+    font-family: 'Poppins', sans-serif;
+}
+
+
+/* const */
+
+:root {
+    --bg-dark-blue: #3E5569;
+    --bg-body-gray: #E9ECEF;
+    --bg-green: #9cbf13;
+    --bg-primary: #161d52;
+    --bg-secondary: #437aa1;
+    --bg-danger: #FF4E48;
+    --bg-body-white: #ffffff;
+    --text-primary: #161d52;
+    --text-secondary: #437aa1;
+    --text-dark-blue: #3E5569;
+}
+
+body {
+    background: var(--bg-body-gray);
+    color: #343A40;
+}
+
+section {
+    padding: 12em 0 0 0;
+}
+
+p {
+    text-align: justify;
+    text-justify: inter-word;
+}
+
+
+/* Background Color */
+
+.bg-dark-blue {
+    background: var(--bg-primary);
+}
+
+.bg-secondary {
+    background-color: var(--bg-secondary) !important;
+}
+
+.bg-danger {
+    background-color: var(--bg-danger);
+}
+
+
+/* End Background Color */
+
+
+/* button */
+
+.btn-success {
+    background-color: var(--bg-green);
+    border: none;
+}
+
+
+/* end Button */
+
+
+/* Badge */
+
+.badge-green {
+    padding: 0.7rem;
+    color: #fff !important;
+    background-color: var(--bg-green) !important;
+}
+
+/* End Badge */
+
+
+/* Text */
+
+.text-primary {
+    color: var(--bg-primary) !important;
+}
+
+.text-dark-blue {
+    color: var(--text-dark-blue);
+}
+
+.text-secondary {
+    color: var(--bg-secondary) !important;
+}
+
+/* End Text */
+
+
+/* Button */
+
+.btn-dark-blue {
+    background-color: var(--bg-primary);
+    color: white;
+}
+
+.btn-dark-blue:hover {
+    background-color: var(--bg-dark-blue);
+    color: white;
+}
+
+
+/* End Button */
+
+
+/* Auth */
+
+#auth {
+    padding-top: 8em;
+}
+
+#auth .bg1 {
+    position: absolute;
+    right: 13em;
+    top: -3em;
+    z-index: -1;
+}
+
+#auth .bg2 {
+    position: absolute;
+    left: 15em;
+    top: -7em;
+    z-index: -1;
+}
+
+#email {
+    padding-top: 8em;
+    padding-bottom: 8em;
+}
+
+#email .bg1 {
+    position: absolute;
+    right: 14em;
+    top: -3em;
+    z-index: -1;
+}
+
+#email .bg2 {
+    position: absolute;
+    left: 22em;
+    top: -7em;
+    z-index: -1;
+}
+
+#reset {
+    padding-top: 8em;
+    padding-bottom: 8em;
+}
+
+#reset .bg1 {
+    position: absolute;
+    right: 14em;
+    top: -3em;
+    z-index: -1;
+}
+
+#reset .bg2 {
+    position: absolute;
+    left: 15em;
+    top: -7em;
+    z-index: -1;
+}
+
+/* End Auth */
+
+
+/* Dashboard */
+#dashboard {
+    padding-top: 2em;
+    padding-bottom: 3em;
+}
+
+.section .card .header {
+    height: 120px;
+    background: url('../images/dashboard/bg-avatar.png');
+    background-size: cover;
+}
+
+.section .card .header .avatar {
+    width: 80px;
+    height: 100%;
+    position: relative;
+    margin: 0 auto;
+}
+
+.section .card .header .avatar img {
+    display: block;
+    border-radius: 50%;
+    position: absolute;
+    left: -5rem;
+    bottom: -3rem;
+
+}
+
+/* End Dashboard */
+
+/* Landing Page */
+
+#hero {
+    background: url('../images/hero/bg.png');
+    background-position: bottom center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    padding-bottom: 10em;
+}
+
+#hero h1 {
+    font-size: 3rem;
+}
+
+#fitur {
+    padding-top: 0;
+}
+
+#tentang {
+    padding-top: 0;
+    margin-top: 3rem;
+    background: var(--bg-secondary);
+}
+
+
+/* End Landing Page */
+
+
+/* About Us */
+
+#about-us {
+    padding-bottom: 0em;
+    background-color: var(--bg-body-white) !important;
+}
+
+#about-us .hero {
+    padding-bottom: 5em;
+}
+
+#about-us h1 {
+    font-size: 3rem;
+}
+
+#about-us h4 {
+    line-height: 1.4em;
+}
+
+.description {
+    border-radius: 10px;
+    padding: 1.8em;
+    background-color: var(--bg-body-gray);
+    margin-bottom: 6em;
+}
+
+.mail {
+    background-color: #181A23;
+    padding: 5em;
+    color: white;
+}
+
+.mail p {
+    text-align: justify;
+    text-justify: auto;
+    margin-top: 2em;
+    font-size: 10pt;
+}
+
+.mail li {
+    margin-top: 0.5em;
+}
+
+.form-mail {
+    font-size: 10pt;
+    padding: 1.8rem;
+    background-color: #22242D;
+}
+
+.form-control {
+    padding: 0.6em;
+}
+
+
+/* End About Us */
+
+
+/* Calculator */
+
+#app-calculator {
+    background-color: var(--bg-body-white);
+}
+
+.hero-calculator {
+    background: url('../images/hero/bg.png');
+    background-position: bottom center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    padding-bottom: 5em;
+    padding-top: 5em;
+}
+
+.form-calculator {
+    padding-top: 1em;
+    padding-bottom: 5rem;
+}
+
+.form-calculator .title {
+    padding-bottom: 1rem;
+}
+
+.result {
+    padding: 1rem;
+}
+
+.content {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+}
+
+.content h1 {
+    margin-bottom: 2rem;
+}
+
+.img {
+    padding: 0;
+}
+
+
+/* End Calculator */
+
+
+/* Footer */
+
+.footer {
+    background-color: var(--bg-dark-blue);
+}
+
+.footer a {
+    color: var(--bg-body-gray);
+}
+
+.footer .col-3 {
+    margin-top: 45px;
+}
+
+.footer .feature {
+    padding-top: 3rem;
+}
+
+
+/* End Footer */
+
+
+/* Responsive */
+
+@media (min-width: 320px) and (max-width: 767px) {
+
+    /* Auth Responsive */
+    #auth {
+        padding-top: 4em;
+    }
+
+    #auth .bg1 {
+        position: absolute;
+        right: 0em;
+        top: -3em;
+        z-index: -1;
+    }
+
+    #auth .bg2 {
+        position: absolute;
+        left: 0em;
+        top: -7em;
+        z-index: -1;
+    }
+
+    #email .bg1 {
+        position: absolute;
+        right: 0em;
+        top: -3em;
+        z-index: -1;
+    }
+
+    #email .bg2 {
+        position: absolute;
+        left: 0em;
+        top: -7em;
+        z-index: -1;
+    }
+
+    #reset .bg1 {
+        position: absolute;
+        right: 0em;
+        top: -3em;
+        z-index: -1;
+    }
+
+    #reset .bg2 {
+        position: absolute;
+        left: 0em;
+        top: -7em;
+        z-index: -1;
+    }
+
+    #hero {
+        padding-top: 3rem;
+        padding-bottom: 3rem;
+    }
+
+    /* About_Us */
+    #about-us h1 {
+        font-size: 2.5rem;
+    }
+
+    #about-us h4 {
+        font-size: 1rem;
+    }
+
+    .mail {
+        padding: 2rem;
+    }
+
+    /* End About_us */
+    /* Calculator */
+    .hero-calculator h4 {
+        font-size: 10pt;
+    }
+
+    .form-calculator h5 {
+        font-size: 12pt;
+    }
+
+    .child {
+        font-size: 7pt !important;
+    }
+
+    .button {
+        display: grid;
+    }
+
+    /* End Calculator */
+    /* Footer */
+    .img-footer {
+        width: 60%;
+    }
+
+    .footer h5 {
+        font-size: 12pt;
+    }
+
+    .footer li {
+        font-size: 10pt;
+    }
+
+    .footer p {
+        font-size: 9pt;
+    }
+
+    .footer .feature {
+        padding-top: 0;
+    }
+
+    .footer .copyright {
+        font-size: 8pt;
+    }
+
+    /* End Footer */
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+
+    /* Auth Responsive */
+    #auth {
+        padding-top: 4em;
+    }
+
+    #register .bg1 {
+        position: absolute;
+        right: 0em;
+        top: -3em;
+        z-index: -1;
+    }
+
+    #register .bg2 {
+        position: absolute;
+        left: 0em;
+        top: -7.3em;
+        z-index: -1;
+    }
+
+    #email .bg1 {
+        position: absolute;
+        right: 0em;
+        top: -3em;
+        z-index: -1;
+    }
+
+    #email .bg2 {
+        position: absolute;
+        left: 5em;
+        top: -7em;
+        z-index: -1;
+    }
+
+    #reset .bg1 {
+        position: absolute;
+        right: 0em;
+        top: -3em;
+        z-index: -1;
+    }
+
+    #reset .bg2 {
+        position: absolute;
+        left: 0em;
+        top: -7em;
+        z-index: -1;
+    }
+
+    #hero {
+        padding-top: 3rem;
+        padding-bottom: 5rem;
+    }
+
+    /* Calculator */
+    .child {
+        font-size: 7pt !important;
+    }
+
+    .button {
+        display: grid;
+    }
+
+    /* End Calculator */
+    /* Footer */
+    .img-footer {
+        width: 60%;
+    }
+
+    .footer h5 {
+        font-size: 12pt;
+    }
+
+    .footer li {
+        font-size: 10pt;
+    }
+
+    .footer p {
+        font-size: 9pt;
+    }
+
+    .footer .copyright {
+        font-size: 8pt;
+    }
+
+    .footer .feature {
+        padding-top: 3rem;
+    }
+
+    /* End Footer */
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+
+    /* Auth responsive */
+    #auth {
+        padding-top: 4em;
+    }
+
+    #auth .bg1 {
+        position: absolute;
+        right: 6em;
+        top: -3em;
+        z-index: -1;
+    }
+
+    #auth .bg2 {
+        position: absolute;
+        left: 6em;
+        top: -7em;
+        z-index: -1;
+    }
+
+    #email .bg1 {
+        position: absolute;
+        right: 6em;
+        top: -3em;
+        z-index: -1;
+    }
+
+    #email .bg2 {
+        position: absolute;
+        left: 12em;
+        top: -7em;
+        z-index: -1;
+    }
+
+    #reset .bg1 {
+        position: absolute;
+        right: 6em;
+        top: -3em;
+        z-index: -1;
+    }
+
+    #reset .bg2 {
+        position: absolute;
+        left: 5em;
+        top: -7em;
+        z-index: -1;
+    }
+}
+
+@media (min-width: 1200px) {}
+
+@media (min-width: 1400px) {}
+
+
+/* End Responsive */
