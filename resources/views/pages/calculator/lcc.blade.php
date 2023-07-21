@@ -19,7 +19,7 @@
                             </div>
                             <div class="col-md-4">
                                 <input type="text" name="nama_mesin" id="name" class="form-control"
-                                    placeholder="Input Text">
+                                    placeholder="Masukkan Sama">
                             </div>
                         </div>
                         <div class="row mb-3">
@@ -27,8 +27,11 @@
                                 <h5>Biaya Inisiasi</h5>
                             </div>
                             <div class="col-md-4">
-                                <input type="number" name="biaya_inisiasi" id="inisiasi" class="form-control count"
-                                    placeholder="Input Text">
+                                <div class="input-group">
+                                    <span class="input-group-text">Rp</span>
+                                    <input type="number" name="biaya_inisiasi" id="inisiasi" class="form-control count"
+                                        placeholder="0">
+                                </div>
                             </div>
                         </div>
                         <div class="row mb-3">
@@ -36,8 +39,11 @@
                                 <h5>Biaya Operasional Tahunan</h5>
                             </div>
                             <div class="col-md-4">
-                                <input type="number" name="biaya_operasional_tahunan" id="operasional"
-                                    class="form-control count" placeholder="Input Text">
+                                <div class="input-group">
+                                    <span class="input-group-text">Rp</span>
+                                    <input type="number" name="biaya_operasional_tahunan" id="operasional"
+                                        class="form-control count" placeholder="0">
+                                </div>
                             </div>
                         </div>
                         <div class="row mb-3">
@@ -45,8 +51,11 @@
                                 <h5>Biaya Pemeliharaan Tahunan</h5>
                             </div>
                             <div class="col-md-4">
-                                <input type="number" name="biaya_pemeliharaan_tahunan" id="pemeliharaan"
-                                    class="form-control count" placeholder="Input Text">
+                                <div class="input-group">
+                                    <span class="input-group-text">Rp</span>
+                                    <input type="number" name="biaya_pemeliharaan_tahunan" id="pemeliharaan"
+                                        class="form-control count" placeholder="0">
+                                </div>
                             </div>
                         </div>
                         <div class="row mb-3">
@@ -54,8 +63,11 @@
                                 <h5>Biaya Pembongkaran</h5>
                             </div>
                             <div class="col-md-4">
-                                <input type="number" name="biaya_pembongkaran" id="pembongkaran" class="form-control count"
-                                    placeholder="Input Text">
+                                <div class="input-group">
+                                    <span class="input-group-text">Rp</span>
+                                    <input type="number" name="biaya_pembongkaran" id="pembongkaran"
+                                        class="form-control count" placeholder="0">
+                                </div>
                             </div>
                         </div>
                         <div class="row mb-3">
@@ -63,12 +75,19 @@
                                 <h5>Estimasi Masa Hidup</h5>
                             </div>
                             <div class="col-md-4">
-                                <input type="number" name="estimasi_tahunan" id="estimasi" class="form-control"
-                                    placeholder="Input Text">
+                                <div class="input-group">
+                                    <span class="input-group-text">Rp</span>
+                                    <input type="number" name="estimasi_tahunan" id="estimasi" class="form-control"
+                                        placeholder="0">
+                                </div>
                             </div>
                         </div>
                         @auth
-                            <button type="submit" class="btn btn-primary float-end">Simpan</button>
+                            @can('user')
+                                <div class="mb-3 button">
+                                    <button type="submit" class="btn btn-primary float-end">Simpan</button>
+                                </div>
+                            @endcan
                         @endauth
                     </form>
                 </div>

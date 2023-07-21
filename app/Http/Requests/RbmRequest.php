@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class OeeRequest extends FormRequest
+class RbmRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,13 +25,11 @@ class OeeRequest extends FormRequest
     {
         return [
             'nama_mesin' => 'required',
-            'shift_start' => 'required',
-            'shift_end' => 'required',
-            'planned_downtime' => 'required',
-            'unplanned_downtime' => 'required',
-            'total_parts_produced' => 'required',
-            'ideal_run_rate' => 'required',
-            'total_scrap' => 'required',
+            'jangka_waktu' => 'required',
+            'severity' => 'required|integer|min:1|max:5',
+            'occurrence' => 'required|integer|min:1|max:5',
+            'risk' => 'required|string',
+            'rekomendasi' => 'required|string',
         ];
     }
 }

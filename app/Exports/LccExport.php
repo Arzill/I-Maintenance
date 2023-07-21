@@ -3,6 +3,7 @@
 namespace App\Exports;
 
 use App\Models\DetailMaintenance;
+use App\Models\Lcc;
 use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\FromQuery;
@@ -22,7 +23,7 @@ class LccExport implements FromQuery, WithHeadings, WithMapping, WithTitle, Shou
     public function query()
     {
         $userLogin = Auth::id();
-        return DetailMaintenance::query()->whereHas('maintenance', function ($query) use ($userLogin) {
+        return Lcc::query()->whereHas('maintenance', function ($query) use ($userLogin) {
             $query->where('jenis_maintenance', 'lcc')->where('id_user', $userLogin);
         });
     }

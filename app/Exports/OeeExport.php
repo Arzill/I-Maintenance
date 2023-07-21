@@ -2,10 +2,8 @@
 
 namespace App\Exports;
 
-use App\Models\DetailMaintenance;
 use App\Models\Oee;
 use Illuminate\Support\Facades\Auth;
-use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\FromQuery;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\WithHeadings;
@@ -23,7 +21,7 @@ class OeeExport implements FromQuery, WithHeadings, WithMapping, WithTitle, Shou
     public function query()
     {
         $userLogin = Auth::id();
-        return DetailMaintenance::query()->whereHas('maintenance', function ($query) use ($userLogin) {
+        return Oee::query()->whereHas('maintenance', function ($query) use ($userLogin) {
             $query->where('jenis_maintenance', 'oee')->where('id_user', $userLogin);
         });
     }
@@ -50,7 +48,7 @@ class OeeExport implements FromQuery, WithHeadings, WithMapping, WithTitle, Shou
         return [
             $this->number += 1,
             \App\Helpers\DateHelper::getIndonesiaDate($oee->created_at),
-            $oee->nama_mesin,
+            $oee->maintenance->nama_mesin,
             round($oee->performance) . "%",
             round($oee->quality) . "%",
             round($oee->avaibility) . "%",

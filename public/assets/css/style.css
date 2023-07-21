@@ -70,6 +70,7 @@ p {
     background-color: var(--bg-green) !important;
 }
 
+
 /* End Badge */
 
 
@@ -86,6 +87,7 @@ p {
 .text-secondary {
     color: var(--bg-secondary) !important;
 }
+
 
 /* End Text */
 
@@ -164,10 +166,12 @@ p {
     z-index: -1;
 }
 
+
 /* End Auth */
 
 
 /* Dashboard */
+
 #dashboard {
     padding-top: 2em;
     padding-bottom: 3em;
@@ -188,14 +192,54 @@ p {
 
 .section .card .header .avatar img {
     display: block;
+    width: 100px;
+    height: 100px;
     border-radius: 50%;
     position: absolute;
     left: -5rem;
     bottom: -3rem;
-
 }
 
+.avatar-wrapper {
+    width: 100%;
+    height: auto;
+    margin: 0 auto;
+}
+
+.avatar-wrapper img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    /* position: absolute; */
+    /* left: 0rem;
+    bottom: 0rem; */
+}
+
+.custom-file-button input[type=file] {
+    margin-left: -2px !important;
+}
+
+.custom-file-button input[type=file]::-webkit-file-upload-button {
+    display: none;
+}
+
+.custom-file-button input[type=file]::file-selector-button {
+    display: none;
+}
+
+.custom-file-button label {
+    background-color: #EBF2D0;
+    cursor: pointer;
+}
+
+.custom-file-button:hover label {
+    background-color: var(--bg-green);
+    cursor: pointer;
+}
+
+
 /* End Dashboard */
+
 
 /* Landing Page */
 
@@ -323,6 +367,15 @@ p {
     padding: 0;
 }
 
+.form-calculator .input-group span {
+    border-right: none;
+    background-color: #fff;
+}
+
+.form-calculator .input-group input {
+    border-left: none;
+}
+
 
 /* End Calculator */
 
@@ -352,253 +405,216 @@ p {
 /* Responsive */
 
 @media (min-width: 320px) and (max-width: 767px) {
-
     /* Auth Responsive */
     #auth {
         padding-top: 4em;
     }
-
     #auth .bg1 {
         position: absolute;
         right: 0em;
         top: -3em;
         z-index: -1;
     }
-
     #auth .bg2 {
         position: absolute;
         left: 0em;
         top: -7em;
         z-index: -1;
     }
-
+    .section .card .header .avatar img {
+        display: block;
+        width: 110px;
+        height: 110px;
+        border-radius: 50%;
+        position: absolute;
+        left: -6.8rem;
+        bottom: -3rem;
+    }
     #email .bg1 {
         position: absolute;
         right: 0em;
         top: -3em;
         z-index: -1;
     }
-
     #email .bg2 {
         position: absolute;
         left: 0em;
         top: -7em;
         z-index: -1;
     }
-
     #reset .bg1 {
         position: absolute;
         right: 0em;
         top: -3em;
         z-index: -1;
     }
-
     #reset .bg2 {
         position: absolute;
         left: 0em;
         top: -7em;
         z-index: -1;
     }
-
     #hero {
         padding-top: 3rem;
         padding-bottom: 3rem;
     }
-
     /* About_Us */
     #about-us h1 {
         font-size: 2.5rem;
     }
-
     #about-us h4 {
         font-size: 1rem;
     }
-
     .mail {
         padding: 2rem;
     }
-
     /* End About_us */
     /* Calculator */
     .hero-calculator h4 {
         font-size: 10pt;
     }
-
     .form-calculator h5 {
         font-size: 12pt;
     }
-
     .child {
         font-size: 7pt !important;
     }
-
     .button {
         display: grid;
     }
-
     /* End Calculator */
     /* Footer */
     .img-footer {
         width: 60%;
     }
-
     .footer h5 {
         font-size: 12pt;
     }
-
     .footer li {
         font-size: 10pt;
     }
-
     .footer p {
         font-size: 9pt;
     }
-
     .footer .feature {
         padding-top: 0;
     }
-
     .footer .copyright {
         font-size: 8pt;
     }
-
     /* End Footer */
 }
 
 @media (min-width: 768px) and (max-width: 991px) {
-
     /* Auth Responsive */
     #auth {
         padding-top: 4em;
     }
-
     #register .bg1 {
         position: absolute;
         right: 0em;
         top: -3em;
         z-index: -1;
     }
-
     #register .bg2 {
         position: absolute;
         left: 0em;
         top: -7.3em;
         z-index: -1;
     }
-
     #email .bg1 {
         position: absolute;
         right: 0em;
         top: -3em;
         z-index: -1;
     }
-
     #email .bg2 {
         position: absolute;
         left: 5em;
         top: -7em;
         z-index: -1;
     }
-
     #reset .bg1 {
         position: absolute;
         right: 0em;
         top: -3em;
         z-index: -1;
     }
-
     #reset .bg2 {
         position: absolute;
         left: 0em;
         top: -7em;
         z-index: -1;
     }
-
     #hero {
         padding-top: 3rem;
         padding-bottom: 5rem;
     }
-
     /* Calculator */
     .child {
         font-size: 7pt !important;
     }
-
     .button {
         display: grid;
     }
-
     /* End Calculator */
     /* Footer */
     .img-footer {
         width: 60%;
     }
-
     .footer h5 {
         font-size: 12pt;
     }
-
     .footer li {
         font-size: 10pt;
     }
-
     .footer p {
         font-size: 9pt;
     }
-
     .footer .copyright {
         font-size: 8pt;
     }
-
     .footer .feature {
         padding-top: 3rem;
     }
-
     /* End Footer */
 }
 
 @media (min-width: 992px) and (max-width: 1199px) {
-
     /* Auth responsive */
     #auth {
         padding-top: 4em;
     }
-
     #auth .bg1 {
         position: absolute;
         right: 6em;
         top: -3em;
         z-index: -1;
     }
-
     #auth .bg2 {
         position: absolute;
         left: 6em;
         top: -7em;
         z-index: -1;
     }
-
     #email .bg1 {
         position: absolute;
         right: 6em;
         top: -3em;
         z-index: -1;
     }
-
     #email .bg2 {
         position: absolute;
         left: 12em;
         top: -7em;
         z-index: -1;
     }
-
     #reset .bg1 {
         position: absolute;
         right: 6em;
         top: -3em;
         z-index: -1;
     }
-
     #reset .bg2 {
         position: absolute;
         left: 5em;

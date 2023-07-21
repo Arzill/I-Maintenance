@@ -3,10 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\PenggunaUpdateRequest;
+use App\Http\Requests\ProfileRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use RealRashid\SweetAlert\Facades\Alert;
+use Intervention\Image\Facades\Image;
+use Illuminate\Support\Str;
 
 class PenggunaController extends Controller
 {
@@ -73,6 +78,76 @@ class PenggunaController extends Controller
             }
         } catch (\Throwable $th) {
             Alert::error('Error', 'Gagal menghapus data karena ' . $th->getMessage());
+            return redirect()->back();
+        }
+    }
+    public function updateSettings(ProfileRequest $request, User $user)
+    {
+        try {
+            $id = Auth::user()->id;
+            $user = User::findOrFail($id);
+            $attr = $request->all();
+
+            // Image
+            if ($request->hasFile('image')) {
+                $file = $attr['image'];
+                $filename = $attr['name'] . '-' . Str::random(5) . '.' . $file->getClientOriginalExtension();
+                $filePath = $file->storeAs('public/images/profile', $filename);
+                $attr['image'] =  $filename;
+                // Resize the image
+                $img = Image::make($file)->resize(600, null, function ($constraint) {
+                    $constraint->aspectRatio();
+                });
+                $img->save(storage_path('app/' . $filePath));
+                $old_image = $user->image;
+                if ($old_image) {
+                    Storage::delete('public/images/profile/' . $old_image);
+                }
+            } else {
+                $attr['image'] = null;
+            }
+
+            // Update Data
+            $user->update([
+                'name' => $attr['name'],
+                'email' => $attr['email'],
+                'no_hp' => $attr['no_hp'],
+                'tempat_bekerja' => $attr['tempat_bekerja'],
+                'posisi' => $attr['posisi'],
+                'image' => $attr['image'],
+            ]);
+
+            Alert::success('Sukses', 'Berhasil mengubah profile');
+            return redirect()->route('settings');
+        } catch (\Throwable $th) {
+            Alert::error('Error', 'Gagal mengubah data karena ' . $th->getMessage());
+            return redirect()->back();
+        }
+    }
+
+    public function updatePassword(Request $request)
+    {
+        try {
+            $id = Auth::user()->id;
+            $user = User::find($id);
+            if (Hash::check($request->password_lama, $user->password)) {
+
+                if ($request->password_baru == $request->konfirmasi_password) {
+                    $user->update([
+                        'password' => Hash::make($request->password_baru)
+                    ]);
+                    Alert::success('Sukses', 'Berhasil mengubah password');
+                    return redirect()->route('settings');
+                } else {
+                    Alert::error('Error', 'Gagal konfirmasi');
+                    return redirect()->route('settings');
+                }
+            } else {
+                Alert::error('Error', 'Password salah');
+                return redirect()->route('settings');
+            }
+        } catch (\Throwable $th) {
+            Alert::error('Error', 'Gagal mengubah data karena ' . $th->getMessage());
             return redirect()->back();
         }
     }

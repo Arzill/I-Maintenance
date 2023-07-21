@@ -14,8 +14,8 @@
                         aria-current="page" href="{{ route('calculator-oee') }}">OEE</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ request()->routeIs('calculator-rmb') ? 'text-primary' : '' }}"
-                        href="{{ route('calculator-rmb') }}">RMB</a>
+                    <a class="nav-link {{ request()->routeIs('calculator-rbm') ? 'text-primary' : '' }}"
+                        href="{{ route('calculator-rbm') }}">RBM</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link {{ request()->routeIs('calculator-lcc') ? 'text-primary' : '' }}"

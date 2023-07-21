@@ -32,7 +32,7 @@
             <div class="card border-0 shadow-sm">
                 <div class="card-body pb-2">
                     <p class="card-text text-primary">Risk Based Maintenance</p>
-                    <h3 class="card-title fw-bold">{{ $rmbCount }}</h3>
+                    <h3 class="card-title fw-bold">{{ $rbmCount }}</h3>
                 </div>
             </div>
             <div class="card border-0 shadow-sm">
@@ -61,30 +61,22 @@
                         <tbody>
 
                             @forelse ($maintenance as $data )
-                            @php
-                            $detailMaintenance = $data->detailMaintenance->first();
-                            @endphp
-                            @if($detailMaintenance->count() > 0)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ \App\Helpers\DateHelper::getIndonesiaDate($data->created_at) }}</td>
                                 <td>
-                                    @if ($detailMaintenance)
-                                    {{ $detailMaintenance->nama_mesin }}
-                                    @else
-                                    No Detail Maintenance Found
-                                    @endif
+                                    {{ $data->nama_mesin }}
                                 </td>
                                 @if ($data->jenis_maintenance === 'oee')
-                                <td>{{ round($detailMaintenance->result_oee) }}%</td>
-                                @elseif ($data->jenis_maintenance === 'rmb')
-                                <td>Rp. {{ round($detailMaintenance->result_rmb) }}</td>
+                                <td>{{ round($data->oee->first()->result_oee) }}%</td>
+                                @elseif ($data->jenis_maintenance === 'rbm')
+                                <td>{{ $data->rbm->first()->result_rbm }}</td>
                                 @elseif ($data->jenis_maintenance === 'lcc')
-                                <td>Rp. {{ round($detailMaintenance->result_lcc) }}</td>
+                                <td>Rp. {{ \App\Helpers\DateHelper::getFormatNumber($data->lcc->first()->result_lcc) }}
+                                </td>
                                 @endif
-                                <td class="text-center">{{ $data->jenis_maintenance }}</td>
+                                <td class="text-center">{{ Str::upper($data->jenis_maintenance) }}</td>
                             </tr>
-                            @endif
                             @empty
                             <tr>
                                 <td colspan="6" class="text-center text-dark-blue">Tidak ada Data</td>

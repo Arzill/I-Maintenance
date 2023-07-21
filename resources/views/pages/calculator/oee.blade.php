@@ -64,11 +64,10 @@
                     </div>
                     <div class="row mb-3">
                         <div class="col-md-8">
-                            <h5>Ideal Cycle Time</h5>
+                            <h5>Ideal Run Rate</h5>
                         </div>
                         <div class="col-md-4">
-                            <input type="number" name="ideal_cycle_time" id="idealCycleTime" class="form-control" />
-                            <div class="form-text">(minutes per part)</div>
+                            <input type="number" name="ideal_run_rate" id="idealRunRate" class="form-control" />
                         </div>
                     </div>
                     <div class="row mb-3">
@@ -80,9 +79,11 @@
                         </div>
                     </div>
                     @auth()
+                    @can('user')
                     <div class="mb-3 button">
                         <button type="submit" class="btn btn-primary float-end">Simpan</button>
                     </div>
+                    @endcan
                     @endauth
                 </form>
             </div>
@@ -230,7 +231,7 @@
                 let plannedDowntime = parseInt($('#planned').val());
                 let unplannedDowntime = parseInt($('#unplanned').val());
                 let totalPartsProduced = parseInt($('#total').val());
-                let idealCycleTime = parseInt($('#idealCycleTime').val());
+                let idealRunRate = parseInt($('#idealRunRate').val());
                 let totalScrap = parseInt($('#scrap').val());
                 // Hitung nilai Shift Length
                 let shiftLength = calculateShiftLength(shiftStart, shiftEnd);
@@ -241,21 +242,27 @@
                 // Hitung nilai Operating Time
                 let operatingTime = plannedProductionTime - unplannedDowntime;
 
-                // Hitung nilai Availability
+              // Hitung nilai Availability
                 let availability = (operatingTime / plannedProductionTime) * 100;
-                availability = isNaN(availability) ? 0 : Math.min(Math.round(availability), 100);
+                availability = isNaN(availability) ? 0 : availability;
+                availability = Math.round(Math.max(Math.min(availability, 100), 0));
 
                 // Hitung nilai Performance
-                let performance = (totalPartsProduced / operatingTime) / idealCycleTime;
-                performance = isNaN(performance) ? 0 : Math.min(Math.round(performance * 100), 100);
+                let performance = (totalPartsProduced / operatingTime) / idealRunRate;
+                performance = isNaN(performance) ? 0 : performance;
+                performance = Math.round(Math.max(Math.min(performance * 100, 100), 0));
 
                 // Hitung nilai Quality
                 let quality = (totalPartsProduced - totalScrap) / totalPartsProduced;
-                quality = isNaN(quality) ? 0 : Math.min(Math.round(quality * 100), 100);
+                quality = isNaN(quality) ? 0 : quality;
+                quality = Math.round(Math.max(Math.min(quality * 100, 100), 0));
 
                 // Hitung nilai OEE
                 let oee = (availability / 100) * (performance / 100) * (quality / 100);
-                oee = isNaN(oee) ? 0 : Math.min(Math.round(oee * 100), 100);
+                oee = isNaN(oee) ? 0 : oee;
+                oee = Math.round(Math.max(Math.min(oee * 100, 100), 0));
+
+
 
                 // Tampilkan hasil ke result
                 $('#result_availability').text(availability);
@@ -277,9 +284,6 @@
                     keterangan.addClass('bg-danger').text('Harap untuk mengecek Mesin anda')
                 }
             }
-
-
-
             // Mengubah waktu ke dalam menit dengan format AM dan PM
             function getTimeValue(time) {
                 let parts = time.split(':');
@@ -304,7 +308,7 @@
                 return end - start;
             }
 
-            $('#shiftstart, #shiftend, #planned, #unplanned, #total, #idealCycleTime, #scrap').change(function() {
+            $('#shiftstart, #shiftend, #planned, #unplanned, #total, #idealRunRate, #scrap').change(function() {
                 calculateOEE();
             });
 

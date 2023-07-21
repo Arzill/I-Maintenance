@@ -6,9 +6,10 @@
             <div class="card border-0 shadow-sm px-2">
                 <div class="card-body">
                     <div class="row justify-content-between align-items-center">
-                        <div class="col-md-8">
+                        <div class="col-lg-8 col-md-12">
                             <h2 class="fw-bold text-dark-blue">Pengaturan</h2>
-                            <p class="text-dark-blue fw-medium">Anda dapat menambahkan atau merubah data diri maupun password
+                            <p class="text-dark-blue fw-medium">Anda dapat menambahkan atau merubah data diri maupun
+                                password
                             </p>
                         </div>
                         <div class="col-md-auto">
@@ -23,15 +24,21 @@
                 <div class="card-body">
                     <h5 class="text-dark-blue">Profil</h5>
                     <p class="fw-light text-dark-blue">Data diri</p>
-                    <form action="{{ route('update-settings') }}" method="POST" enctype="multipart/form-data"
-                        id="form-filter">
+                    <form action="{{ route('update-settings') }}" method="POST" enctype="multipart/form-data">
                         @csrf
+                        @method('patch')
                         <div class="row">
-                            <div class="col-md-3">
-                                <img src="{{ Auth::user()->image ? Auth::user()->image : asset('assets/images/logo/avatar.png') }}"
-                                    class="img-fluid rounded-circle" width="300px">
+                            <div class="col-lg-3 col-md-12 mb-3 text-center">
+                                <div class="avatar-wrapper">
+                                    <img src="{{ Auth::user()->image ? asset('storage/images/profile/' . Auth::user()->image) : asset('assets/images/logo/avatar.png') }}"
+                                        alt="User Profile" class="">
+                                </div>
                                 <div class="mt-3">
-                                    <input type="file" name="image" class="form-control">
+                                    <div class="input-group custom-file-button">
+                                        <label class="input-group-text" for="inputGroupFile">Upload</label>
+                                        <input type="file" class="form-control" id="inputGroupFile">
+                                    </div>
+
                                 </div>
                             </div>
                             <div class="col-md-9">
@@ -76,7 +83,7 @@
                 <div class="card-body">
                     <h5 class="text-dark-blue">Password</h5>
                     <p class="fw-light text-dark-blue">Anda dapat mengubah password disini</p>
-                    <form id="form-filter" action="{{ route('update-password') }}" method="POST">
+                    <form action="{{ route('update-password') }}" method="POST">
                         @csrf
                         <div class="row">
                             <div class="col-md-12">

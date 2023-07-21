@@ -13,12 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('maintenances', function (Blueprint $table) {
+        Schema::create('rbms', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->uuid('id_user');
-            $table->string('nama_mesin');
-            $table->enum('jenis_maintenance', ['oee', 'rbm', 'lcc']);
-            $table->foreign('id_user')->references('id')->on('users');
+            $table->foreignUuid('id_maintenance')->references('id')->on('maintenances');
+            $table->string('jangka_waktu');
+            $table->integer('severity')->default(0);
+            $table->integer('occurrence')->default(0);
+            $table->float('result_rbm')->default(0);
+            $table->string('risk');
+            $table->string('rekomendasi');
             $table->timestamps();
         });
     }
@@ -30,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('maintenances');
+        Schema::dropIfExists('rbms');
     }
 };

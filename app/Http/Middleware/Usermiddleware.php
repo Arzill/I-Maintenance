@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 
-class AdminMiddleware
+class Usermiddleware
 {
     /**
      * Handle an incoming request.
@@ -15,15 +15,15 @@ class AdminMiddleware
      * @param  \Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse)  $next
      * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
      */
-    public function handle($request, Closure $next)
+    public function handle(Request $request, Closure $next)
     {
-        // Cek apakah pengguna telah login dan memiliki role "admin"
-        if (auth()->check() && auth()->user()->role === 'admin') {
+        // Cek apakah pengguna telah login dan memiliki role "user"
+        if (auth()->check() && auth()->user()->role === 'user') {
             return $next($request);
         }
 
-        // Jika pengguna tidak memiliki role "admin", alihkan ke halaman lain atau tampilkan pesan error
-        Alert::error('Error', 'Anda bukan admin');
+        // Jika pengguna tidak memiliki role "user", alihkan ke halaman lain atau tampilkan pesan error
+        Alert::error('Error', 'Silahkan login terlebih dahulu');
 
         return redirect()->route('home');
     }

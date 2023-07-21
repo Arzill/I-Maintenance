@@ -12,9 +12,17 @@ class Maintenance extends Model
 
     protected $guarded = ['id'];
 
-    public function detailMaintenance()
+    public function oee()
     {
-        return $this->hasOne(DetailMaintenance::class, 'id_maintenance');
+        return $this->hasMany(Oee::class, 'id_maintenance');
+    }
+    public function rbm()
+    {
+        return $this->hasMany(Rbm::class, 'id_maintenance');
+    }
+    public function lcc()
+    {
+        return $this->hasMany(Lcc::class, 'id_maintenance');
     }
 
     public function user()

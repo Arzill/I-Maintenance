@@ -4,7 +4,7 @@ use App\Http\Controllers\Calculator\LccController;
 use App\Http\Controllers\Calculator\OeeController;
 use App\Http\Controllers\GuestController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\Calculator\RmbController;
+use App\Http\Controllers\Calculator\RbmController;
 use App\Http\Controllers\PenggunaController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -35,32 +35,45 @@ Route::get('/about-us', function () {
         : app()->make(GuestController::class)->aboutUs();
 })->name('aboutUs');
 
-// Dashboard
+// User Dashboard
 Route::get('/dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
-Route::get('/riwayat-rmb', [HomeController::class, 'rmb'])->name('rmb');
+Route::get('/riwayat-rbm', [HomeController::class, 'rbm'])->name('rbm');
 Route::get('/riwayat-oee', [HomeController::class, 'oee'])->name('oee');
 Route::get('/riwayat-lcc', [HomeController::class, 'lcc'])->name('lcc');
 Route::get('/settings', [HomeController::class, 'settings'])->name('settings');
-Route::post('/settings/update', [HomeController::class, 'updateSettings'])->name('update-settings');
-Route::post('/settings/updatePassword', [HomeController::class, 'updatePassword'])->name('update-password');
-
+Route::patch('/settings/update', [PenggunaController::class, 'updateSettings'])->name('update-settings');
+Route::patch('/settings/updatePassword', [PenggunaController::class, 'updatePassword'])->name('update-password');
 
 // Oee
-Route::get('oee', [OeeController::class, 'index'])->name('calculator-oee');
-Route::post('oee/store', [OeeController::class, 'store'])->name('calculator-oee.store');
-Route::delete('oee/delete/{id}', [OeeController::class, 'destroy'])->name('calculator-oee.delete');
-Route::get('oee/export', [OeeController::class, 'exportOee'])->name('calculator-oee.export');
+Route::prefix('oee')->group(function () {
+    Route::get('/', [OeeController::class, 'index'])->name('calculator-oee');
+    Route::post('store', [OeeController::class, 'store'])->name('calculator-oee.store');
+    Route::delete('delete/{id}', [OeeController::class, 'destroy'])->name('calculator-oee.delete');
+    Route::get('export', [OeeController::class, 'exportOee'])->name('calculator-oee.export');
+});
+
 
 // Lcc
-Route::get('lcc', [LccController::class, 'index'])->name('calculator-lcc');
-Route::post('lcc/store', [LccController::class, 'store'])->name('calculator-lcc.store');
-Route::delete('lcc/delete/{id}', [LccController::class, 'destroy'])->name('calculator-lcc.delete');
-Route::get('lcc/export', [LccController::class, 'exportLcc'])->name('calculator-lcc.export');
+Route::prefix('lcc')->group(function () {
+    Route::get('/', [LccController::class, 'index'])->name('calculator-lcc');
+    Route::post('store', [LccController::class, 'store'])->name('calculator-lcc.store');
+    Route::delete('delete/{id}', [LccController::class, 'destroy'])->name('calculator-lcc.delete');
+    Route::get('export', [LccController::class, 'exportLcc'])->name('calculator-lcc.export');
+});
 
-// Rmb
-Route::get('rmb', [RmbController::class, 'index'])->name('calculator-rmb');
+
+// RBM
+Route::prefix('rbm')->group(function () {
+    Route::get('/', [RbmController::class, 'index'])->name('calculator-rbm');
+    Route::post('/store', [RbmController::class, 'store'])->name('calculator-rbm.store');
+    Route::delete('/delete/{id}', [RbmController::class, 'destroy'])->name('calculator-rbm.delete');
+    Route::get('/export', [RbmController::class, 'exportRbm'])->name('calculator-rbm.export');
+});
+
+
 
 Route::middleware(['admin'])->group(function () {
+    // Admin Dashboard
     Route::get('pengguna', [PenggunaController::class, 'index'])->name('pengguna');
     Route::get('pengguna/edit/{id}', [PenggunaController::class, 'edit'])->name('pengguna.edit');
     Route::patch('pengguna/update/{id}', [PenggunaController::class, 'update'])->name('pengguna.update');

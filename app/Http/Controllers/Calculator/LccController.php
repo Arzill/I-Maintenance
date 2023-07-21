@@ -6,7 +6,7 @@ use App\Exports\LccExport;
 use App\Exports\OeeExport;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\LccRequest;
-use App\Models\DetailMaintenance;
+use App\Models\Lcc;
 use App\Models\Maintenance;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Http\Request;
@@ -36,14 +36,14 @@ class LccController extends Controller
                 // Insert Data Maintenance
                 $maintenance = new Maintenance();
                 $maintenance->id_user = Auth::user()->id;
+                $maintenance->nama_mesin = $attr['nama_mesin'];
                 $maintenance->jenis_maintenance = 'lcc';
                 $maintenance->save();
 
 
                 // Insert Data Detail Maintenance
-                $data = new DetailMaintenance();
+                $data = new Lcc();
                 $data->id_maintenance = $maintenance->id;
-                $data->nama_mesin = $attr['nama_mesin'];
                 $data->biaya_inisiasi = $attr['biaya_inisiasi'];
                 $data->biaya_operasional_tahunan = $attr['biaya_operasional_tahunan'];
                 $data->biaya_pemeliharaan_tahunan = $attr['biaya_pemeliharaan_tahunan'];
@@ -66,20 +66,22 @@ class LccController extends Controller
     public function exportLcc()
     {
         if (Auth::check()) {
-            return Excel::download(new LccExport, 'lcc.xlsx');
+            return Excel::download(new LccExport, 'Riwayat LCC.xlsx');
+        } else {
+            return redirect('login');
         }
     }
 
     public function destroy(string $id)
     {
-        if (Auth::check()) {
-            try {
+        try {
+            if (Auth::check()) {
                 $userLogin = Auth::id();
 
-                $detailMaintenance = DetailMaintenance::findOrFail($id);
+                $detailMaintenance = Lcc::findOrFail($id);
 
                 $maintenance = Maintenance::where('id_user', $userLogin)
-                    ->whereHas('detailMaintenance', function ($query) use ($id) {
+                    ->whereHas('lcc', function ($query) use ($id) {
                         $query->where('id', $id);
                     })
                     ->first();
@@ -94,12 +96,13 @@ class LccController extends Controller
                     });
                 }
                 Alert::success('Sukses', 'Data Berhasil Dihapus');
-            } catch (\Throwable $th) {
-                Alert::error('Error', 'Gagal menghapus data ' . $th->getMessage());
+                return redirect()->back();
+            } else {
+                return redirect('login');
             }
+        } catch (\Throwable $th) {
+            Alert::error('Error', 'Gagal menghapus data ' . $th->getMessage());
             return redirect()->back();
-        } else {
-            return redirect('login');
         }
     }
 }
