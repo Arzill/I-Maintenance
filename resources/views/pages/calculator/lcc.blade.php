@@ -75,10 +75,9 @@
                                 <h5>Estimasi Masa Hidup</h5>
                             </div>
                             <div class="col-md-4">
-                                <div class="input-group">
-                                    <input type="number" name="estimasi_tahunan" id="estimasi" class="form-control"
-                                        placeholder="0">
-                                </div>
+                                <input type="number" name="estimasi_tahunan" id="estimasi" class="form-control"
+                                    placeholder="0">
+                                <div class="form-text float-end fw-light">(dalam bentuk tahun)</div>
                             </div>
                         </div>
                         @auth
@@ -166,6 +165,39 @@
     </section>
 
     <section class="content">
+        <div class="container">
+            <h1 class="text-center">Bagaimana Mengefisienkan Nilai LCC?</h1>
+            <p>Nilai LCC yang lebih rendah berarti pengeluaran uang yang lebih rendah juga, namun tidak berarti jika anda
+                menggunakan mesin atau sparepart yang lebih murah dapat menghasilkan keuntungan yang sama andaikan anda
+                menggunakan mesin atau sparepart dengan bahan dan desain yang lebih bagus. Berikut adalah saran atau
+                peraturan umum yang mungkin dapat membantu anda dalam mengefisienkan biaya estimasi berdasarkan LCC.</p>
+            <ul>
+                <li class="mb-4"><b>Temukan keseimbangan antara biaya operasional dan biaya pemeliharaan.</b> Dengan
+                    tenaga kerja yang
+                    lebih
+                    banyak maka mesin dapat dirawat secara intensif, mirip seperti listirk, bahan, baku, atau bahan bakar
+                    terutama pada mesin yang rentan mengalami kerusakan jika tiba-tiba berhenti. Namun memiliki tenaga kerja
+                    yang terlalu banyak atau memastikan bahan baku pada kapasitas penuh dapat membengkakan biaya
+                    operasional. Sebaliknya, jika mesin menggunakan sparepart dengan bahan yang lebih bagus maka kerentanan
+                    mesin dalam kerusakan dapat menurun sehingga mesin lebih awet. Tetapi bahan terlalu bagus juga dapat
+                    menaikan harga pemeliharaan. Pilihlah keseimbangan antara produksi dengan sparepart yang memadai, tidak
+                    jauh melebihi kebutuhan yang ada.</li>
+                <li class="mb-4"><b>Semakin banyak mesin yang dipasang maka semakin mahal biaya pembongkaran, biaya
+                        operasional, dan biaya pemeliharaan.</b> Selain ditentukan dari kompleksitas dan besarnya mesin,
+                    biaya pembongkaran juga dipengaruhi jumlah mesin yang terpasang. Semakin banyak mesin yang terpasang
+                    berarti semakin besar biaya pembongkarannya. Sehingga disarankan untuk memasang mesin dengan jumlah
+                    sesuai kebutuhan yang ada. Pilihlah jumlah mesin yang anda percaya dapat anda rawat.</li>
+                <li class="mb-4"><b>Semakin lama mesin digunakan maka semakin mahal biaya pemeliharaan.</b> Seiring
+                    dengan umur, mesin akan menjadi rentan mengalami kerusakan dikarenakan kualitas komponen menurun karena
+                    usia. Dengan ini maka semakin besar pula biaya pemeliharaan pada mesin yang berumur tua. Dalam beberapa
+                    kasus, lebih baik untuk mengganti mesin secara keseluruhan dibandingkan memperbaikinya. Oleh karena itu,
+                    gunakanlah mesin sesuai ekspektasi hidup yang diberikan atau waspadalah jika terjadi kerusakan yang
+                    banyak pada interval dekat.</li>
+            </ul>
+        </div>
+    </section>
+
+    <section class="content bg-secondary text-white">
         <div class="container">
             <h1 class="text-center">Kesimpulan</h1>
             <p>LCC menggambarkan biaya jangka panjang dari sebuah mesin. Dari awal pembelian hingga akhir pembongkaran.

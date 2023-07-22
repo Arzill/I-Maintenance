@@ -22,7 +22,7 @@ return new class extends Migration
             $table->decimal('biaya_pemeliharaan_tahunan', 12, 2)->default(0);
             $table->decimal('biaya_pembongkaran', 12, 2)->default(0);
             $table->float('estimasi_tahunan')->default(0);
-            $table->decimal('result_lcc')->default(0);
+            $table->decimal('result_lcc', 12, 2)->default(0);
             $table->timestamps();
         });
     }

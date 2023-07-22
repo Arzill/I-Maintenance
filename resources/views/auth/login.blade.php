@@ -68,9 +68,11 @@
                                         {{ __('Sign In') }}
                                     </button>
                                 </div>
-                                <p class="text-center mb-4">New on our platform? <a href="{{ route('register') }}"
+                                <p class="text-center mb-1">New on our platform? <a href="{{ route('register') }}"
                                         class="text-decoration-none text-primary">Create
                                         an Account</a></p>
+                                <p class="text-center mb-3">or ? <a href="{{ route('password.request') }}"
+                                        class="text-decoration-none text-primary">Forget Password</a></p>
                             </form>
                         </div>
                     </div>
