@@ -76,7 +76,6 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="input-group">
-                                    <span class="input-group-text">Rp</span>
                                     <input type="number" name="estimasi_tahunan" id="estimasi" class="form-control"
                                         placeholder="0">
                                 </div>

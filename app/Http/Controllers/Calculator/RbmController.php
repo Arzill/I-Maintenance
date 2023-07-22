@@ -124,15 +124,9 @@ class RbmController extends Controller
     {
         try {
             if (Auth::check()) {
-                $userLogin = Auth::id();
+                $detailMaintenance = Rbm::where('id_maintenance', $id);
 
-                $detailMaintenance = Rbm::findOrFail($id);
-
-                $maintenance = Maintenance::where('id_user', $userLogin)
-                    ->whereHas('rbm', function ($query) use ($id) {
-                        $query->where('id', $id);
-                    })
-                    ->first();
+                $maintenance = Maintenance::where('id', $id)->first();
 
                 DB::transaction(function () use ($detailMaintenance) {
                     $detailMaintenance->delete();

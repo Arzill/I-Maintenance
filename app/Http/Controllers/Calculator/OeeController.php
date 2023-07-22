@@ -137,15 +137,10 @@ class OeeController extends Controller
     {
         try {
             if (Auth::check()) {
-                $userLogin = Auth::id();
 
-                $detailMaintenance = Oee::findOrFail($id);
+                $detailMaintenance = Oee::where('id_maintenance', $id)->first();
 
-                $maintenance = Maintenance::where('id_user', $userLogin)
-                    ->whereHas('oee', function ($query) use ($id) {
-                        $query->where('id', $id);
-                    })
-                    ->first();
+                $maintenance = Maintenance::where('id', $id)->first();
 
                 DB::transaction(function () use ($detailMaintenance) {
                     $detailMaintenance->delete();

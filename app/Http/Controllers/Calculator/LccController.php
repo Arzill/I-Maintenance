@@ -76,18 +76,20 @@ class LccController extends Controller
     {
         try {
             if (Auth::check()) {
-                $userLogin = Auth::id();
 
-                $detailMaintenance = Lcc::findOrFail($id);
+                $lcc = Lcc::where('id_maintenance', $id)->first();
 
-                $maintenance = Maintenance::where('id_user', $userLogin)
-                    ->whereHas('lcc', function ($query) use ($id) {
-                        $query->where('id', $id);
-                    })
+                // $maintenance = Maintenance::where('id_user', $userLogin)
+                //     ->whereHas('lcc', function ($query) use ($id) {
+                //         $query->where('id', $id);
+                //     })
+                //     ->first();
+
+                $maintenance = Maintenance::where('id', $id)
                     ->first();
 
-                DB::transaction(function () use ($detailMaintenance) {
-                    $detailMaintenance->delete();
+                DB::transaction(function () use ($lcc) {
+                    $lcc->delete();
                 });
 
                 if ($maintenance) {
