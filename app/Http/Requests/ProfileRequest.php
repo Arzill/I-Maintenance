@@ -26,9 +26,9 @@ class ProfileRequest extends FormRequest
         return [
             'name' => 'required',
             'email' => 'required',
-            'no_hp' => 'nullable',
-            'tempat_bekerja' => 'nullable',
-            'posisi' => 'nullable',
+            'no_hp' => 'required',
+            'tempat_bekerja' => 'required',
+            'posisi' => 'required',
             'image' => 'nullable|image|mimes:jpeg,png,jpg|max:3072'
         ];
     }

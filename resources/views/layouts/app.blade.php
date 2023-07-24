@@ -59,6 +59,16 @@
                     // Tampilkan modal delete
                     $('#deleteModal').modal('show');
                 });
+                $('#numbersOnlyInput').on('input', function() {
+                    // Get the current value of the input field
+                    let inputValue = $(this).val();
+
+                    // Use a regular expression to replace any non-numeric characters with an empty string
+                    let numericValue = inputValue.replace(/[^0-9]/g, '');
+
+                    // Update the input field with the numeric value
+                    $(this).val(numericValue);
+                });
     </script>
 </body>
 

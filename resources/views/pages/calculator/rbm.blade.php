@@ -28,8 +28,9 @@
                             <h5 class="fw-bold">Jangka Waktu</h5>
                         </div>
                         <div class="col-md-4">
-                            <input type="number" name="jangka_waktu" id="jangkaWaktu" class="form-control"
-                                placeholder="Jangka Waktu" />
+                            <input type="number" maxlength="12" name="jangka_waktu" id="jangkaWaktu"
+                                class="form-control" placeholder="Jangka Waktu" />
+                            <div class="form-text float-start fw-light">(Perbulan)</div>
                         </div>
                     </div>
                     <div class="row mb-3">
@@ -57,7 +58,6 @@
                     </div>
                     @endcan
                     @endauth
-
                 </div>
                 <div class="col-md-6">
                     <div class="row">
@@ -76,9 +76,10 @@
                         </div>
                         <div class="col-md-12 col-12 mb-3 ">
                             <input type="hidden" name="rekomendasi" value="" id="rekomendasi_result">
-                            <div class="d-grid">
-                                <span class="badge   p-3 fs-4 text-white text-center" id="recommendation">
-                                </span>
+                            <div class="d-grid badge   p-3 fs-4 text-white text-center" id="sectionRecommendation">
+                                <p class="text-center">Pencegahan yang terbaik</p>
+                                <a class="text-white" id="recommendation">
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -255,13 +256,14 @@
         $("#risk").text(`Risk: ${risk}`);
         $("#recommendation").text(recommendation);
 
-        $("#recommendation").removeClass("d-none");
         if(recommendation === ''){
+            $("#sectionRecommendation").addClass('d-none');
             $("#recommendation").addClass('d-none');
             $("#rekomendasi_result").val('');
         }else{
+            $("#sectionRecommendation").removeClass('d-none');
+            $("#sectionRecommendation").addClass('bg-secondary');
             $("#recommendation").removeClass('d-none');
-            $("#recommendation").addClass('bg-secondary');
             $("#rekomendasi_result").val(recommendation);
         }
 
@@ -293,6 +295,10 @@ $(document).ready(function() {
         // Mengganti event "change" menjadi "input" untuk menghindari perhitungan saat input dihapus
         $(this).val($(this).val().replace(/[^1-5]/g, ''));
         calculateRPN();
+    });
+    $("#jangkaWaktu").on("input", function() {
+        // Mengganti event "change" menjadi "input" untuk menghindari perhitungan saat input dihapus
+        $(this).val($(this).val().replace(/[^1-9]/g, ''));
     });
 });
 

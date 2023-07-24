@@ -16,7 +16,7 @@
                     @csrf
                     <div class="row mb-3">
                         <div class="col-md-8">
-                            <h5>Nama</h5>
+                            <h5>Nama Mesin</h5>
                         </div>
                         <div class="col-md-4">
                             <input type="text" name="nama_mesin" id="nama_mesin" class="form-control" />
@@ -44,6 +44,7 @@
                         </div>
                         <div class="col-md-4">
                             <input type="number" name="planned_downtime" id="planned" class="form-control" />
+                            <div class="form-text float-start fw-light">(minute)</div>
                         </div>
                     </div>
                     <div class="row mb-3">
@@ -52,6 +53,7 @@
                         </div>
                         <div class="col-md-4">
                             <input type="number" name="unplanned_downtime" id="unplanned" class="form-control" />
+                            <div class="form-text float-start fw-light">(minute)</div>
                         </div>
                     </div>
                     <div class="row mb-3">
@@ -60,6 +62,7 @@
                         </div>
                         <div class="col-md-4">
                             <input type="number" name="total_parts_produced" id="total" class="form-control" />
+                            <div class="form-text float-start fw-light">(Pieces)</div>
                         </div>
                     </div>
                     <div class="row mb-3">
@@ -68,6 +71,7 @@
                         </div>
                         <div class="col-md-4">
                             <input type="number" name="ideal_run_rate" id="idealRunRate" class="form-control" />
+                            <div class="form-text float-start fw-light">(Pieces Per Minute)</div>
                         </div>
                     </div>
                     <div class="row mb-3">
@@ -76,6 +80,7 @@
                         </div>
                         <div class="col-md-4">
                             <input type="number" name="total_scrap" id="scrap" class="form-control " />
+                            <div class="form-text float-start fw-light">(Pieces)</div>
                         </div>
                     </div>
                     @auth()

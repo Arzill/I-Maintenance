@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PasswordRequest;
 use App\Http\Requests\PenggunaUpdateRequest;
 use App\Http\Requests\ProfileRequest;
 use App\Models\User;
@@ -42,51 +43,13 @@ class PenggunaController extends Controller
 
         return response()->json($user);
     }
-    public function update(PenggunaUpdateRequest $request, string $id)
-    {
-        try {
-            $attr = $request->validated();
-
-            $user = User::findOrFail($id);
-            $user->name = $attr['name'];
-            $user->tempat_bekerja = $attr['tempat_bekerja'];
-            $user->posisi = $attr['posisi'];
-            $user->save();
-
-            Alert::success('Sukses', 'Berhasil mengubah data');
-            return redirect('pengguna');
-        } catch (\Throwable $th) {
-            Alert::error('Error', 'Gagal mengubah data karena ' . $th->getMessage());
-            return redirect()->back();
-        }
-    }
-
-    public function destroy(string $id)
-    {
-        try {
-            $user = User::findOrFail($id);
-            $loggedInUserId = Auth::id();
-
-            if ($user->id === $loggedInUserId) {
-                Alert::error('Error', 'Anda tidak dapat menghapus diri anda sendiri');
-                return redirect()->back();
-            }
-
-            if ($user->delete()) {
-                Alert::success('Sukses', 'Berhasil menghapus data');
-                return redirect('pengguna');
-            }
-        } catch (\Throwable $th) {
-            Alert::error('Error', 'Gagal menghapus data karena ' . $th->getMessage());
-            return redirect()->back();
-        }
-    }
     public function updateSettings(ProfileRequest $request, User $user)
     {
         try {
             $id = Auth::user()->id;
             $user = User::findOrFail($id);
-            $attr = $request->all();
+            $attr = $request->validated();
+
 
             // Image
             if ($request->hasFile('image')) {
@@ -104,7 +67,7 @@ class PenggunaController extends Controller
                     Storage::delete('public/images/profile/' . $old_image);
                 }
             } else {
-                $attr['image'] = null;
+                $attr['image'] = $user->image;
             }
 
             // Update Data
@@ -125,16 +88,18 @@ class PenggunaController extends Controller
         }
     }
 
-    public function updatePassword(Request $request)
+    public function updatePassword(PasswordRequest $request)
     {
         try {
             $id = Auth::user()->id;
             $user = User::find($id);
-            if (Hash::check($request->password_lama, $user->password)) {
 
-                if ($request->password_baru == $request->konfirmasi_password) {
+            $attr = $request->validated();
+            if (Hash::check($attr['password_lama'], $user->password)) {
+
+                if ($attr['password_baru'] == $attr['konfirmasi_password']) {
                     $user->update([
-                        'password' => Hash::make($request->password_baru)
+                        'password' => Hash::make($attr['password_baru'])
                     ]);
                     Alert::success('Sukses', 'Berhasil mengubah password');
                     return redirect()->route('settings');

@@ -18,9 +18,9 @@
             <div class="col-md-3 col-6 feature">
                 <h6>Features</h6>
                 <ul class="list-unstyled">
-                    <li><a href="" class="text-decoration-none">OEE</a></li>
-                    <li><a href="" class="text-decoration-none">RBM</a></li>
-                    <li><a href="" class="text-decoration-none">OEE</a></li>
+                    <li><a href="{{ route('calculator-oee') }}" class="text-decoration-none">OEE</a></li>
+                    <li><a href="{{ route('calculator-rbm') }}" class="text-decoration-none">RBM</a></li>
+                    <li><a href="{{ route('calculator-lcc') }}" class="text-decoration-none">LCC</a></li>
                 </ul>
             </div>
             <div class="col-md-3 col-6 feature">

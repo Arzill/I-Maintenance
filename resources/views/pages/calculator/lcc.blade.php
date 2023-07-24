@@ -18,8 +18,14 @@
                                 <h5>Nama Mesin</h5>
                             </div>
                             <div class="col-md-4">
-                                <input type="text" name="nama_mesin" id="name" class="form-control"
+                                <input type="text" name="nama_mesin" id="name"
+                                    class="form-control @error('nama_mesin') is-invalid @enderror"
                                     placeholder="Masukkan Sama">
+                                @error('nama_mesin')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
                             </div>
                         </div>
                         <div class="row mb-3">
@@ -29,8 +35,14 @@
                             <div class="col-md-4">
                                 <div class="input-group">
                                     <span class="input-group-text">Rp</span>
-                                    <input type="number" name="biaya_inisiasi" id="inisiasi" class="form-control count"
+                                    <input type="number" name="biaya_inisiasi" id="inisiasi"
+                                        class="form-control count @error('biaya_inisiasi') is-invalid @enderror"
                                         placeholder="0">
+                                    @error('biaya_inisiasi')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
                                 </div>
                             </div>
                         </div>
@@ -42,7 +54,13 @@
                                 <div class="input-group">
                                     <span class="input-group-text">Rp</span>
                                     <input type="number" name="biaya_operasional_tahunan" id="operasional"
-                                        class="form-control count" placeholder="0">
+                                        class="form-control count @error('biaya_operasional_tahunan') is-invalid @enderror"
+                                        placeholder="0">
+                                    @error('biaya_operasional_tahunan')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
                                 </div>
                             </div>
                         </div>
@@ -54,7 +72,13 @@
                                 <div class="input-group">
                                     <span class="input-group-text">Rp</span>
                                     <input type="number" name="biaya_pemeliharaan_tahunan" id="pemeliharaan"
-                                        class="form-control count" placeholder="0">
+                                        class="form-control count @error('biaya_pemeliharaan_tahunan') is-invalid @enderror"
+                                        placeholder="0">
+                                    @error('biaya_pemeliharaan_tahunan')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
                                 </div>
                             </div>
                         </div>
@@ -66,7 +90,13 @@
                                 <div class="input-group">
                                     <span class="input-group-text">Rp</span>
                                     <input type="number" name="biaya_pembongkaran" id="pembongkaran"
-                                        class="form-control count" placeholder="0">
+                                        class="form-control count @error('biaya_pembongkaran') is-invalid @enderror"
+                                        placeholder="0">
+                                    @error('biaya_pembongkaran')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
                                 </div>
                             </div>
                         </div>
@@ -75,9 +105,14 @@
                                 <h5>Estimasi Masa Hidup</h5>
                             </div>
                             <div class="col-md-4">
-                                <input type="number" name="estimasi_tahunan" id="estimasi" class="form-control"
-                                    placeholder="0">
+                                <input type="number" name="estimasi_tahunan" id="estimasi"
+                                    class="form-control @error('estimasi_tahunan') is-invalid @enderror" placeholder="0">
                                 <div class="form-text float-end fw-light">(dalam bentuk tahun)</div>
+                                @error('estimasi_tahunan')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
                             </div>
                         </div>
                         @auth

@@ -41,8 +41,8 @@ Route::get('/riwayat-rbm', [HomeController::class, 'rbm'])->name('rbm');
 Route::get('/riwayat-oee', [HomeController::class, 'oee'])->name('oee');
 Route::get('/riwayat-lcc', [HomeController::class, 'lcc'])->name('lcc');
 Route::get('/settings', [HomeController::class, 'settings'])->name('settings');
-Route::patch('/settings/update', [PenggunaController::class, 'updateSettings'])->name('update-settings');
-Route::patch('/settings/updatePassword', [PenggunaController::class, 'updatePassword'])->name('update-password');
+Route::patch('/settings/update/{id}', [PenggunaController::class, 'updateSettings'])->name('update-settings');
+Route::patch('/settings/updatePassword/{id}', [PenggunaController::class, 'updatePassword'])->name('update-password');
 
 // Oee
 Route::prefix('oee')->group(function () {

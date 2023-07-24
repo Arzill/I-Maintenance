@@ -79,12 +79,6 @@ class LccController extends Controller
 
                 $lcc = Lcc::where('id_maintenance', $id)->first();
 
-                // $maintenance = Maintenance::where('id_user', $userLogin)
-                //     ->whereHas('lcc', function ($query) use ($id) {
-                //         $query->where('id', $id);
-                //     })
-                //     ->first();
-
                 $maintenance = Maintenance::where('id', $id)
                     ->first();
 
