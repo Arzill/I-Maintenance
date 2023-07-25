@@ -19,7 +19,13 @@
                             <h5>Nama Mesin</h5>
                         </div>
                         <div class="col-md-4">
-                            <input type="text" name="nama_mesin" id="nama_mesin" class="form-control" />
+                            <input type="text" name="nama_mesin" id="nama_mesin"
+                                class="form-control @error('nama_mesin') is-invalid @enderror" />
+                            @error('nama_mesin')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                            @enderror
                         </div>
                     </div>
                     <div class="row mb-3">
@@ -27,7 +33,13 @@
                             <h5>Shift Start</h5>
                         </div>
                         <div class="col-md-4">
-                            <input type="time" name="shift_start" id="shiftstart" class="form-control" />
+                            <input type="time" name="shift_start" id="shiftstart"
+                                class="form-control @error('shift_start') is-invalid @enderror" />
+                            @error('shift_start')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                            @enderror
                         </div>
                     </div>
                     <div class="row mb-3">
@@ -35,7 +47,13 @@
                             <h5>Shift End</h5>
                         </div>
                         <div class="col-md-4">
-                            <input type="time" name="shift_end" id="shiftend" class="form-control" />
+                            <input type="time" name="shift_end" id="shiftend"
+                                class="form-control @error('shift_end') is-invalid @enderror" />
+                            @error('shift_end')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                            @enderror
                         </div>
                     </div>
                     <div class="row mb-3">
@@ -43,8 +61,14 @@
                             <h5>Planned Downtime</h5>
                         </div>
                         <div class="col-md-4">
-                            <input type="number" name="planned_downtime" id="planned" class="form-control" />
-                            <div class="form-text float-start fw-light">(minute)</div>
+                            <input type="number" name="planned_downtime" id="planned"
+                                class="form-control @error('planned_downtime') is-invalid @enderror" />
+                            <div class="form-text fw-light">(minute)</div>
+                            @error('planned_downtime')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                            @enderror
                         </div>
                     </div>
                     <div class="row mb-3">
@@ -52,8 +76,14 @@
                             <h5>Unplanned Downtime</h5>
                         </div>
                         <div class="col-md-4">
-                            <input type="number" name="unplanned_downtime" id="unplanned" class="form-control" />
-                            <div class="form-text float-start fw-light">(minute)</div>
+                            <input type="number" name="unplanned_downtime" id="unplanned"
+                                class="form-control @error('unplanned_downtime') is-invalid @enderror" />
+                            <div class="form-text fw-light">(minute)</div>
+                            @error('unplanned_downtime')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                            @enderror
                         </div>
                     </div>
                     <div class="row mb-3">
@@ -61,8 +91,14 @@
                             <h5>Total Parts Produced</h5>
                         </div>
                         <div class="col-md-4">
-                            <input type="number" name="total_parts_produced" id="total" class="form-control" />
-                            <div class="form-text float-start fw-light">(Pieces)</div>
+                            <input type="number" name="total_parts_produced" id="total"
+                                class="form-control @error('total_parts_produced') is-invalid @enderror" />
+                            <div class="form-text fw-light">(Pieces)</div>
+                            @error('total_parts_produced')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                            @enderror
                         </div>
                     </div>
                     <div class="row mb-3">
@@ -70,8 +106,14 @@
                             <h5>Ideal Run Rate</h5>
                         </div>
                         <div class="col-md-4">
-                            <input type="number" name="ideal_run_rate" id="idealRunRate" class="form-control" />
-                            <div class="form-text float-start fw-light">(Pieces Per Minute)</div>
+                            <input type="number" name="ideal_run_rate" id="idealRunRate"
+                                class="form-control @error('ideal_run_rate') is-invalid @enderror" />
+                            <div class="form-text fw-light">(Pieces Per Minute)</div>
+                            @error('ideal_run_rate')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                            @enderror
                         </div>
                     </div>
                     <div class="row mb-3">
@@ -79,8 +121,14 @@
                             <h5>Total Scrap</h5>
                         </div>
                         <div class="col-md-4">
-                            <input type="number" name="total_scrap" id="scrap" class="form-control " />
-                            <div class="form-text float-start fw-light">(Pieces)</div>
+                            <input type="number" name="total_scrap" id="scrap"
+                                class="form-control @error('total_scrap') is-invalid @enderror" />
+                            <div class="form-text  fw-light">(Pieces)</div>
+                            @error('total_scrap')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                            @enderror
                         </div>
                     </div>
                     @auth()

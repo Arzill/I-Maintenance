@@ -19,8 +19,14 @@
                             <h5 class="fw-bold">Nama Mesin</h5>
                         </div>
                         <div class="col-md-4">
-                            <input type="text" name="nama_mesin" id="namaMesin" class="form-control"
+                            <input type="text" name="nama_mesin" id="namaMesin"
+                                class="form-control @error('nama_mesin') is-invalid @enderror"
                                 placeholder="Nama mesin" />
+                            @error('nama_mesin')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                            @enderror
                         </div>
                     </div>
                     <div class="row mb-3">
@@ -29,8 +35,14 @@
                         </div>
                         <div class="col-md-4">
                             <input type="number" maxlength="12" name="jangka_waktu" id="jangkaWaktu"
-                                class="form-control" placeholder="Jangka Waktu" />
-                            <div class="form-text float-start fw-light">(Perbulan)</div>
+                                class="form-control @error('jangka_waktu') is-invalid @enderror"
+                                placeholder="Jangka Waktu" />
+                            <div class="form-text  fw-light">(Perbulan)</div>
+                            @error('jangka_waktu')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                            @enderror
                         </div>
                     </div>
                     <div class="row mb-3">
@@ -38,8 +50,13 @@
                             <h5 class="fw-bold">Severity</h5>
                         </div>
                         <div class="col-md-4">
-                            <input type="text" maxlength="1" name="severity" id="severity" class="form-control"
-                                placeholder="Skala 1-5" />
+                            <input type="text" maxlength="1" name="severity" id="severity"
+                                class="form-control @error('severity') is-invalid @enderror" placeholder="Skala 1-5" />
+                            @error('severity')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                            @enderror
                         </div>
                     </div>
                     <div class="row mb-3">
@@ -48,7 +65,12 @@
                         </div>
                         <div class="col-md-4">
                             <input type="text" maxlength="1" name="occurrence" id="occurrence" placeholder="Skala 1-5"
-                                class="form-control" />
+                                class="form-control @error('occurrence') is-invalid @enderror" />
+                            @error('occurrence')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                            @enderror
                         </div>
                     </div>
                     @auth()
