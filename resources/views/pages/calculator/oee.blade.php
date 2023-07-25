@@ -3,8 +3,8 @@
 @section('content')
 <section class="hero-calculator">
     <div class="container text-center mb-4">
-        <h1 class="text-primary">Overall Equipment Effectiveness calculator</h1>
-        <h4 class="text-secondary">help you estimate the inspection on existing machines</h4>
+        <h1 class="text-primary fw-bold">Overall Equipment Effectiveness calculator</h1>
+        <h4 class="text-secondary fw-bold">help you estimate the inspection on existing machines</h4>
     </div>
 </section>
 
@@ -95,27 +95,33 @@
             <div class="col-md-6">
                 <div class="row">
                     <div class="col-md-12 col-12 mb-3 ">
-                        <div class="card result bg-dark-blue">
-                            <h3 class="text-white text-center title">OEE%</h3>
-                            <h3 class="text-white text-center"><span id="result_oee">0</span>%</h3>
+                        <div class="card result bg-dark-blue ">
+                            <h3 class="text-white text-center title fw-bold">OEE%</h3>
+                            <h3 class="text-white text-center fw-bold"><span id="result_oee" class="fw-bold">0</span>%
+                            </h3>
                         </div>
                     </div>
                     <div class="col-md-4 col-4 mb-3 ">
                         <div class="card result bg-dark-blue">
-                            <h5 class="text-white text-center title child">Performance</h5>
-                            <h3 class="text-white text-center"><span id="result_performance">0</span>%</h3>
+                            <h5 class="text-white text-center title child fw-bold">Performance</h5>
+                            <h3 class="text-white text-center fw-bold"><span id="result_performance"
+                                    class="fw-bold">0</span>%
+                            </h3>
                         </div>
                     </div>
                     <div class="col-md-4 col-4 mb-3 ">
                         <div class="card result bg-dark-blue">
-                            <h5 class="text-white text-center title child">Quality</h5>
-                            <h3 class="text-white text-center"><span id="result_quality">0</span>%</h3>
+                            <h5 class="text-white text-center title child fw-bold">Quality</h5>
+                            <h3 class="text-white text-center fw-bold"><span id="result_quality"
+                                    class="fw-bold">0</span>%</h3>
                         </div>
                     </div>
                     <div class="col-md-4 col-4 mb-3 ">
                         <div class="card result bg-dark-blue">
-                            <h5 class="text-white text-center title child">Availability</h5>
-                            <h3 class="text-white text-center"><span id="result_availability">0</span>%</h3>
+                            <h5 class="text-white text-center title child fw-bold">Availability</h5>
+                            <h3 class="text-white text-center fw-bold"><span id="result_availability"
+                                    class="fw-bold">0</span>%
+                            </h3>
                         </div>
                     </div>
                     <div class="col-md-12">
@@ -132,7 +138,7 @@
 
 <section class="content bg-secondary text-white">
     <div class="container">
-        <h1 class="text-center">Apa yang diberikan OEE kepada mesin ada?</h1>
+        <h1 class="text-center fw-bold">Apa yang diberikan OEE kepada mesin ada?</h1>
         <p>OEE (Overall Equipment Efficiency) memberikan wawasan yang berharga tentang kinerja mesin atau peralatan
             produksi Anda. OEE menggabungkan tiga faktor utama yaitu ketersediaan (availability), kinerja (performance),
             dan kualitas (quality), untuk memberikan gambaran keseluruhan tentang efisiensi dan produktivitas mesin.
@@ -140,7 +146,8 @@
             efektif mesin mencapai target kecepatan produksi yang diinginkan, dan seberapa baik mesin menghasilkan
             produk berkualitas tinggi tanpa adanya cacat atau scrap. Informasi ini membantu Anda mengidentifikasi area
             perbaikan dan mengoptimalkan kinerja mesin untuk meningkatkan efisiensi produksi.</p>
-        <div class="row">
+        <div class="row justify-content-center">
+            <p>Berikut merupakan penjelasan singkat terkait data yang di butuhkan diatas:</p>
             <div class="col-lg-8 col-md-8 col-12">
                 <img src="{{ asset('assets/images/calculator/oeeTabelInputan.png') }}" class="img-fluid" alt="">
             </div>
@@ -150,7 +157,7 @@
 
 <section class="content">
     <div class="container">
-        <h1 class="text-center">Bagaimana Cara Kerja Kalkulator OEE?</h1>
+        <h1 class="text-center fw-bold">Bagaimana Cara Kerja Kalkulator OEE?</h1>
         <p>Kalkulator OEE bekerja dengan mengumpulkan data operasional dan kuantitatif dari mesin atau peralatan
             produksi.
             Data ini meliputi waktu operasional, waktu berhenti yang direncanakan, waktu berhenti yang tidak
@@ -171,7 +178,7 @@
 
 <section class="content bg-secondary text-white">
     <div class="container">
-        <h1 class="text-center">Mengapa Mengotomatiskan Perhitungan OEE Anda?</h1>
+        <h1 class="text-center fw-bold">Mengapa Mengotomatiskan Perhitungan OEE Anda?</h1>
         <p>Mengotomatiskan perhitungan OEE memiliki beberapa manfaat. Pertama, otomatisasi mengurangi kesalahan manusia
             dalam perhitungan dan memastikan konsistensi dalam pengumpulan dan analisis data. Kedua, otomatisasi
             memungkinkan perhitungan OEE secara real-time, memberikan informasi yang lebih cepat dan akurat tentang
@@ -185,7 +192,7 @@
 {{-- edit --}}
 <section class="content">
     <div class="container">
-        <h1 class="text-center">Bagaimana Meningkatkan OEE?</h1>
+        <h1 class="text-center fw-bold">Bagaimana Meningkatkan OEE?</h1>
         <ol>
             <li class="fw-light mb-3">Tingkatkan Ketersediaan: Identifikasi dan kurangi waktu berhenti yang tidak
                 direncanakan, lakukan
@@ -208,7 +215,7 @@
 </section>
 <section class="content bg-secondary text-white">
     <div class="container">
-        <h1 class="text-center">Kesimpulan</h1>
+        <h1 class="text-center fw-bold">Kesimpulan</h1>
         <p>OEE memberikan wawasan yang penting tentang kinerja mesin atau peralatan produksi Anda. Dengan memahami
             bagaimana OEE dihitung dan menggunakan kalkulator OEE, Anda dapat mengidentifikasi area perbaikan dan
             mengoptimalkan kinerja mesin untuk meningkatkan efisiensi dan produktivitas. Mengotomatiskan perhitungan OEE

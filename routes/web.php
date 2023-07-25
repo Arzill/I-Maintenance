@@ -68,6 +68,12 @@ Route::prefix('rbm')->group(function () {
     Route::post('/store', [RbmController::class, 'store'])->name('calculator-rbm.store');
     Route::delete('/delete/{id}', [RbmController::class, 'destroy'])->name('calculator-rbm.delete');
     Route::get('/export', [RbmController::class, 'exportRbm'])->name('calculator-rbm.export');
+    Route::get('/preventive-maintenance', function () {
+        return view('pages.calculator.preventiveMaintenance');
+    })->name('preventiveMaintenance');
+    Route::get('/correctiveMaintenance', function () {
+        return view('pages.calculator.correctiveMaintenance');
+    })->name('correctiveMaintenance');
 });
 
 

@@ -43,6 +43,55 @@ class PenggunaController extends Controller
 
         return response()->json($user);
     }
+    public function update(PenggunaUpdateRequest $request, string $id)
+    {
+        try {
+            $attr = $request->validated();
+
+            $user = User::findOrFail($id);
+            $user->name = $attr['name'];
+            $user->tempat_bekerja = $attr['tempat_bekerja'];
+            $user->posisi = $attr['posisi'];
+            $user->save();
+
+            Alert::success('Sukses', 'Berhasil mengubah data');
+            return redirect('pengguna');
+        } catch (\Throwable $th) {
+            Alert::error('Error', 'Gagal mengubah data karena ' . $th->getMessage());
+            return redirect()->back();
+        }
+    }
+
+    public function destroy(string $id)
+    {
+        try {
+            $user = User::findOrFail($id);
+            $loggedInUserId = Auth::id();
+
+            if ($user->id === $loggedInUserId) {
+                Alert::error('Error', 'Anda tidak dapat menghapus diri anda sendiri');
+                return redirect()->back();
+            }
+            // Step 1: Hapus data terkait transaksi (OEE, LCC, RBM)
+            foreach ($user->maintenance as $maintenance) {
+                $maintenance->oee()->delete();
+                $maintenance->lcc()->delete();
+                $maintenance->rbm()->delete();
+            }
+
+            // Step 2: Hapus data dari tabel maintenances
+            $user->maintenance()->delete();
+
+            // Step 3: Hapus data user
+            $user->delete();
+
+            Alert::success('Sukses', 'Berhasil menghapus data');
+            return redirect('pengguna');
+        } catch (\Throwable $th) {
+            Alert::error('Error', 'Gagal menghapus data karena ' . $th->getMessage());
+            return redirect()->back();
+        }
+    }
     public function updateSettings(ProfileRequest $request, User $user)
     {
         try {

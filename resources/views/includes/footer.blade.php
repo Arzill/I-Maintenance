@@ -5,7 +5,7 @@
                 <img src="{{ asset('assets/images/logo/footer.png') }}" alt="i-maintenance" width="40%"
                     class="img-footer">
 
-                <h5 class="mt-4 ">I-Maintenance <br>
+                <h5 class="mt-4 fw-bold ">I-Maintenance <br>
                     adalah website untuk melakukan perhitungan Maintenance meliputi OEE, RBM, dan LCC.
                 </h5>
 

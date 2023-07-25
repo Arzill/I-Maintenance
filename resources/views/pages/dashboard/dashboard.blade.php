@@ -63,7 +63,7 @@
                             @forelse ($maintenance as $data )
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ \App\Helpers\DateHelper::getIndonesiaDate($data->created_at) }}</td>
+                                <td>{{ \App\Helpers\DateHelper::getIndonesiaDate($data->updated_at) }}</td>
                                 <td>
                                     {{ $data->nama_mesin }}
                                 </td>

@@ -3,8 +3,8 @@
 @section('content')
 <section class="hero-calculator">
     <div class="container text-center mb-4">
-        <h1 class="text-primary">Risk Base Maintenance Calculator</h1>
-        <h4 class="text-secondary">help you estimate the inspection on existing machines</h4>
+        <h1 class="text-primary fw-bold">Risk Base Maintenance Calculator</h1>
+        <h4 class="text-secondary fw-bold">help you estimate the inspection on existing machines</h4>
     </div>
 </section>
 
@@ -63,7 +63,7 @@
                     <div class="row">
                         <div class="col-md-12 col-12 mb-3 ">
                             <div class="card result bg-dark-blue">
-                                <h3 class="text-white text-center title">Risk Priority Number</h3>
+                                <h3 class="text-white text-center title fw-bold">Risk Priority Number</h3>
                                 <h3 class="text-white text-center" id="result">0</h3>
                             </div>
                         </div>
@@ -78,7 +78,7 @@
                             <input type="hidden" name="rekomendasi" value="" id="rekomendasi_result">
                             <div class="d-grid badge   p-3 fs-4 text-white text-center" id="sectionRecommendation">
                                 <p class="text-center">Pencegahan yang terbaik</p>
-                                <a class="text-white" id="recommendation">
+                                <a href="" class="text-white" id="recommendation">
                                 </a>
                             </div>
                         </div>
@@ -91,7 +91,7 @@
 
 <section class="content bg-secondary text-white">
     <div class="container">
-        <h1 class="text-center">Apa manfaat menggunakan perhitungan RBM ?</h1>
+        <h1 class="text-center fw-bold">Apa manfaat menggunakan perhitungan RBM ?</h1>
         <p>RBM (Risk Base Maintenance) merupakan metode pemeliharaan yang didasarkan pada analisis risiko untuk
             mengelola kegagalan komponen atau suatu sistem dengan lebih efektif. Dengan menggunakan perhitungan RBM,
             suatu mesin produksi dapat pengelolaan pemeliharaan yang lebih efisien dengan memfokuskan upaya dan sumber
@@ -105,7 +105,7 @@
 
 <section class="content">
     <div class="container">
-        <h1 class="text-center">Bagaimana cara kerja Kalkulator RBM ?</h1>
+        <h1 class="text-center fw-bold">Bagaimana cara kerja Kalkulator RBM ?</h1>
         <p>Metode perhitungan RBM yang digunakan adalah gabungan dari metode RBM dan FMEA untuk mengurangi risiko pada
             suatu mesin produksi. Dengan gabungan metode ini, didapatkan perhitungan Risk Priority Number. Untuk
             mendapatkan nilai RPN dibutuhkan data Severity dan Occurrence, yang nantinya akan menjadi sebuah perhitungan
@@ -127,7 +127,7 @@
 
 <section class="content bg-secondary text-white">
     <div class="container">
-        <h1 class="text-center">Bagaimana cara melihat Risk Matrix ?</h1>
+        <h1 class="text-center fw-bold">Bagaimana cara melihat Risk Matrix ?</h1>
         <p>Setelah mendapatkan nilai RPN, selanjutnya adalah menentukan dimana letak nilai RPN pada Risk Matrix sesuai
             kategori. Terdapat 3 kategori dalam Risk Matrix, <span style="color: #91EF88">Hijau</span>, <span
                 style="color: #FDFF8A">Kuning</span>, dan
@@ -145,14 +145,14 @@
 {{-- edit --}}
 <section class="content">
     <div class="container">
-        <h1 class="text-center">Membuat Mitigasi Plan</h1>
+        <h1 class="text-center fw-bold">Membuat Mitigasi Plan</h1>
         <p>Suatu mesin produksi yang sering terjadi kerusakan dapat merugikan anda. Sehingga setelah melakukan
             identifikasi suatu keparahan mesin produksi, selanjutnya adalah melakukan perencanaan perawatan. Terdapa 3
             metode secara umum yang dapat digunakan, yaitu: </p>
         <ul class="ms-4">
-            <li class="fw-light mb-3">Corrective Maintenance
+            <li class=" mb-3">Corrective Maintenance
             </li>
-            <li class="fw-light mb-3">Preventive Maintenance</li>
+            <li class=" mb-3">Preventive Maintenance</li>
         </ul>
         <p>Dengan begini, maka anda dapat mengurangi kerusakan pada suatu mesin produksi,. Sehingga kedepannya tidak
             akan terjadi kerusakan yang lebih parah dari sebelumnya.</p>
@@ -260,10 +260,17 @@
             $("#sectionRecommendation").addClass('d-none');
             $("#recommendation").addClass('d-none');
             $("#rekomendasi_result").val('');
-        }else{
+        }else if(recommendation === 'Corrective Maintenance'){
             $("#sectionRecommendation").removeClass('d-none');
             $("#sectionRecommendation").addClass('bg-secondary');
             $("#recommendation").removeClass('d-none');
+            $("#recommendation").attr('href', "{{ route('correctiveMaintenance') }}");
+            $("#rekomendasi_result").val(recommendation);
+        }else if(recommendation === 'Preventive Maintenance'){
+            $("#sectionRecommendation").removeClass('d-none');
+            $("#sectionRecommendation").addClass('bg-secondary');
+            $("#recommendation").removeClass('d-none');
+            $("#recommendation").attr('href', "{{ route('preventiveMaintenance') }}");
             $("#rekomendasi_result").val(recommendation);
         }
 

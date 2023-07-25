@@ -3,8 +3,8 @@
 @section('content')
 <section class="hero-calculator">
     <div class="container text-center mb-4">
-        <h1 class="text-primary">Life Cycle Cost Calculator</h1>
-        <h4 class="text-secondary">help you estimate the inspection on existing machines</h4>
+        <h1 class="text-primary fw-bold">Life Cycle Cost Calculator</h1>
+        <h4 class="text-secondary fw-bold">help you estimate the inspection on existing machines</h4>
     </div>
 </section>
 <section class="form-calculator">
@@ -128,8 +128,8 @@
                 <div class="row">
                     <div class="col-md-12 col-12 mb-3 ">
                         <div class="card result bg-dark-blue">
-                            <h3 class="text-white text-center title">Life Cycle Cost</h3>
-                            <h3 class="text-white text-center">Rp <span id="result"></span></h3>
+                            <h3 class="text-white text-center title fw-bold">Life Cycle Cost</h3>
+                            <h3 class="text-white text-center fw-bold">Rp <span id="result"></span></h3>
                         </div>
                     </div>
                 </div>
@@ -140,7 +140,7 @@
 
 <section class="content bg-secondary text-white">
     <div class="container">
-        <h1 class="text-center">Apa yang diberikan LCC kepada mesin anda?</h1>
+        <h1 class="text-center fw-bold">Apa yang diberikan LCC kepada mesin anda?</h1>
         <p>LCC (Life-Cycle Cost) menjabarkan biaya total dalam memiliki sebuah mesin terikat dengan estimasi masa
             hidupnya. LCC melibatkan perhitungan semua biaya yang terkait dengan mesin selama masa pakainya dari tahap
             perencanaan, pemasangan, perawatan, penggunaan, hingga ke pembongkaran. Dengan memprediksi biaya total dari
@@ -151,7 +151,7 @@
 
 <section class="content">
     <div class="container">
-        <h1 class="text-center">Bagaimana Cara Kerja Kalkulator LCC?</h1>
+        <h1 class="text-center fw-bold">Bagaimana Cara Kerja Kalkulator LCC?</h1>
         <p>Kalkulator LCC ini membutuhkan data berupa Biaya Inisiasi, Biaya Operasional, Biaya Pemeliharaan, Biaya
             Pembongkaran, dan Masa Hidup Mesin. Masing-masing data terkecuali Masa Hidup Mesin merupakan akumulasi dari
             berbagai data pendukung lain. Untuk menggunakan mesin dibutuhkan Biaya Operasional dan jika terjadi
@@ -167,7 +167,7 @@
 
 <section class="content bg-secondary text-white">
     <div class="container">
-        <h1 class="text-center">Data Apa Saja Yang Dibutuhkan LCC?</h1>
+        <h1 class="text-center fw-bold">Data Apa Saja Yang Dibutuhkan LCC?</h1>
         <ol>
             <li class="mb-2">Biaya Inisiasi = Biaya yang dibutuhkan untuk akuisisi atau mendapatkan kepemilikan
                 terhadap sebuah
@@ -201,7 +201,7 @@
 
 <section class="content">
     <div class="container">
-        <h1 class="text-center">Bagaimana Mengefisienkan Nilai LCC?</h1>
+        <h1 class="text-center fw-bold">Bagaimana Mengefisienkan Nilai LCC?</h1>
         <p>Nilai LCC yang lebih rendah berarti pengeluaran uang yang lebih rendah juga, namun tidak berarti jika anda
             menggunakan mesin atau sparepart yang lebih murah dapat menghasilkan keuntungan yang sama andaikan anda
             menggunakan mesin atau sparepart dengan bahan dan desain yang lebih bagus. Berikut adalah saran atau
@@ -234,7 +234,7 @@
 
 <section class="content bg-secondary text-white">
     <div class="container">
-        <h1 class="text-center">Kesimpulan</h1>
+        <h1 class="text-center fw-bold">Kesimpulan</h1>
         <p>LCC menggambarkan biaya jangka panjang dari sebuah mesin. Dari awal pembelian hingga akhir pembongkaran.
             Dengan mengetahui LCC anda dapat mengetahui biaya secara garis besar yang membantu dalam perencanaan
             pembelian atau penggunaan sebuah mesin. Perhitugan LCC dapat berubah sesuai kondisi yang ada sehingga

@@ -292,7 +292,8 @@ p {
     border-radius: 10px;
     padding: 1.8em;
     background-color: var(--bg-body-gray);
-    margin-bottom: 6em;
+    margin-top: 5em;
+    margin-bottom: 4em;
 }
 
 .mail {
@@ -405,22 +406,26 @@ p {
 /* Responsive */
 
 @media (min-width: 320px) and (max-width: 767px) {
+
     /* Auth Responsive */
     #auth {
         padding-top: 4em;
     }
+
     #auth .bg1 {
         position: absolute;
         right: 0em;
         top: -3em;
         z-index: -1;
     }
+
     #auth .bg2 {
         position: absolute;
         left: 0em;
         top: -7em;
         z-index: -1;
     }
+
     .section .card .header .avatar img {
         display: block;
         width: 110px;
@@ -430,191 +435,234 @@ p {
         left: -6.8rem;
         bottom: -3rem;
     }
+
     #email .bg1 {
         position: absolute;
         right: 0em;
         top: -3em;
         z-index: -1;
     }
+
     #email .bg2 {
         position: absolute;
         left: 0em;
         top: -7em;
         z-index: -1;
     }
+
     #reset .bg1 {
         position: absolute;
         right: 0em;
         top: -3em;
         z-index: -1;
     }
+
     #reset .bg2 {
         position: absolute;
         left: 0em;
         top: -7em;
         z-index: -1;
     }
+
     #hero {
         padding-top: 3rem;
         padding-bottom: 3rem;
     }
+
     /* About_Us */
     #about-us h1 {
         font-size: 2.5rem;
     }
+
     #about-us h4 {
         font-size: 1rem;
     }
+
     .mail {
         padding: 2rem;
     }
+
     /* End About_us */
     /* Calculator */
     .hero-calculator h4 {
         font-size: 10pt;
     }
+
     .form-calculator h5 {
         font-size: 12pt;
     }
+
     .child {
         font-size: 7pt !important;
     }
+
     .button {
         display: grid;
     }
+
     /* End Calculator */
     /* Footer */
     .img-footer {
         width: 60%;
     }
+
     .footer h5 {
         font-size: 12pt;
     }
+
     .footer li {
         font-size: 10pt;
     }
+
     .footer p {
         font-size: 9pt;
     }
+
     .footer .feature {
         padding-top: 0;
     }
+
     .footer .copyright {
         font-size: 8pt;
     }
+
     /* End Footer */
 }
 
 @media (min-width: 768px) and (max-width: 991px) {
+
     /* Auth Responsive */
     #auth {
         padding-top: 4em;
     }
+
     #register .bg1 {
         position: absolute;
         right: 0em;
         top: -3em;
         z-index: -1;
     }
+
     #register .bg2 {
         position: absolute;
         left: 0em;
         top: -7.3em;
         z-index: -1;
     }
+
     #email .bg1 {
         position: absolute;
         right: 0em;
         top: -3em;
         z-index: -1;
     }
+
     #email .bg2 {
         position: absolute;
         left: 5em;
         top: -7em;
         z-index: -1;
     }
+
     #reset .bg1 {
         position: absolute;
         right: 0em;
         top: -3em;
         z-index: -1;
     }
+
     #reset .bg2 {
         position: absolute;
         left: 0em;
         top: -7em;
         z-index: -1;
     }
+
     #hero {
         padding-top: 3rem;
         padding-bottom: 5rem;
     }
+
     /* Calculator */
     .child {
         font-size: 7pt !important;
     }
+
     .button {
         display: grid;
     }
+
     /* End Calculator */
     /* Footer */
     .img-footer {
         width: 60%;
     }
+
     .footer h5 {
         font-size: 12pt;
     }
+
     .footer li {
         font-size: 10pt;
     }
+
     .footer p {
         font-size: 9pt;
     }
+
     .footer .copyright {
         font-size: 8pt;
     }
+
     .footer .feature {
         padding-top: 3rem;
     }
+
     /* End Footer */
 }
 
 @media (min-width: 992px) and (max-width: 1199px) {
+
     /* Auth responsive */
     #auth {
         padding-top: 4em;
     }
+
     #auth .bg1 {
         position: absolute;
         right: 6em;
         top: -3em;
         z-index: -1;
     }
+
     #auth .bg2 {
         position: absolute;
         left: 6em;
         top: -7em;
         z-index: -1;
     }
+
     #email .bg1 {
         position: absolute;
         right: 6em;
         top: -3em;
         z-index: -1;
     }
+
     #email .bg2 {
         position: absolute;
         left: 12em;
         top: -7em;
         z-index: -1;
     }
+
     #reset .bg1 {
         position: absolute;
         right: 6em;
         top: -3em;
         z-index: -1;
     }
+
     #reset .bg2 {
         position: absolute;
         left: 5em;

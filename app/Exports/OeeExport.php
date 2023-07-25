@@ -47,7 +47,7 @@ class OeeExport implements FromQuery, WithHeadings, WithMapping, WithTitle, Shou
     {
         return [
             $this->number += 1,
-            \App\Helpers\DateHelper::getIndonesiaDate($oee->created_at),
+            \App\Helpers\DateHelper::getIndonesiaDate($oee->updated_at),
             $oee->maintenance->nama_mesin,
             round($oee->performance) . "%",
             round($oee->quality) . "%",

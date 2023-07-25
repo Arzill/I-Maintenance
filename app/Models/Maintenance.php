@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 class Maintenance extends Model
 {
     use HasFactory, Uuid;
-
+    protected $primaryKey = 'id';
     protected $guarded = ['id'];
 
     public function oee()

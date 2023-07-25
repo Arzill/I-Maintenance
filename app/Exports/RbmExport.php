@@ -35,9 +35,12 @@ class RbmExport implements FromQuery, WithHeadings, WithMapping, WithTitle, Shou
             'No',
             'Tanggal',
             'Nama Mesin',
+            'Jangka Waktu',
             'Severity',
             'Occurrence',
             'RPN',
+            'Risk',
+            'Rekomendasi',
         ];
     }
 
@@ -45,11 +48,14 @@ class RbmExport implements FromQuery, WithHeadings, WithMapping, WithTitle, Shou
     {
         return [
             $this->number += 1,
-            \App\Helpers\DateHelper::getIndonesiaDate($rbm->created_at),
+            \App\Helpers\DateHelper::getIndonesiaDate($rbm->updated_at),
             $rbm->maintenance->nama_mesin,
-            round($rbm->severity),
-            round($rbm->occurrence),
-            round($rbm->rbm),
+            $rbm->jangka_waktu,
+            $rbm->severity,
+            $rbm->occurrence,
+            round($rbm->result_rbm),
+            $rbm->risk,
+            $rbm->rekomendasi,
         ];
     }
 }
