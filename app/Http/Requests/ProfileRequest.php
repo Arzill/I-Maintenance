@@ -25,11 +25,24 @@ class ProfileRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'email' => 'required',
-            'no_hp' => 'required',
-            'tempat_bekerja' => 'required',
-            'posisi' => 'required',
+            'email' => 'required|email',
+            'no_hp' => 'nullable',
+            'tempat_bekerja' => 'nullable',
+            'posisi' => 'nullable',
             'image' => 'nullable|image|mimes:jpeg,png,jpg|max:3072'
+        ];
+    }
+
+
+    public function messages()
+    {
+        return [
+            'name.required' => 'Nama wajib diisi',
+            'email.required' => 'Email wajib diisi',
+            'email.email' => 'Format email tidak valid',
+            'image.image' => 'File yang diunggah harus berupa gambar.',
+            'image.mimes' => 'Format gambar yang diizinkan adalah jpeg, png, atau jpg.',
+            'image.max' => 'Ukuran gambar maksimum adalah 3072 KB (3 MB).',
         ];
     }
 }

@@ -140,6 +140,11 @@
             efektif mesin mencapai target kecepatan produksi yang diinginkan, dan seberapa baik mesin menghasilkan
             produk berkualitas tinggi tanpa adanya cacat atau scrap. Informasi ini membantu Anda mengidentifikasi area
             perbaikan dan mengoptimalkan kinerja mesin untuk meningkatkan efisiensi produksi.</p>
+        <div class="row">
+            <div class="col-lg-8 col-md-8 col-12">
+                <img src="{{ asset('assets/images/calculator/oeeTabelInputan.png') }}" class="img-fluid" alt="">
+            </div>
+        </div>
     </div>
 </section>
 
@@ -207,19 +212,6 @@
         <p>OEE memberikan wawasan yang penting tentang kinerja mesin atau peralatan produksi Anda. Dengan memahami
             bagaimana OEE dihitung dan menggunakan kalkulator OEE, Anda dapat mengidentifikasi area perbaikan dan
             mengoptimalkan kinerja mesin untuk meningkatkan efisiensi dan produktivitas. Mengotomatiskan perhitungan OEE
-            mempercepat proses dan meningkatkan akurasi data, sementara strategi untuk meningkatkan OEE melibatkan
-            peningkatan ketersediaan, kinerja, dan kualitas. Dengan fokus pada peningkatan OEE, Anda dapat
-            mengoptimalkan penggunaan mesin dan mencapai kinerja produksi yang lebih baik.</p>
-    </div>
-</section>
-
-<section class="content bg-secondary text-white">
-    <div class="container">
-        <h1 class="text-center">Kesimpulan</h1>
-        <p>OEE memberikan wawasan yang penting tentang kinerja mesin atau peralatan produksi Anda. Dengan memahami
-            bagaimana OEE dihitung dan menggunakan kalkulator OEE, Anda dapat mengidentifikasi area perbaikan dan
-            mengoptimalkan kinerja mesin untuk meningkatkan efisiensi dan produktivitas. Mengotomatiskan perhitungan
-            OEE
             mempercepat proses dan meningkatkan akurasi data, sementara strategi untuk meningkatkan OEE melibatkan
             peningkatan ketersediaan, kinerja, dan kualitas. Dengan fokus pada peningkatan OEE, Anda dapat
             mengoptimalkan penggunaan mesin dan mencapai kinerja produksi yang lebih baik.</p>

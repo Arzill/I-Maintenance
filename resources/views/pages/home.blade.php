@@ -8,12 +8,17 @@
                 <h4 class="fw-bold text-secondary my-3">help you estimate the inspection on existing machines</h4>
                 <div class="row mt-4">
                     <div class="col-md-8 ">
-                        <span class="badge badge-green fw-light me-3 mb-3">Risk-bases
-                            maintenance</span>
-                        <span class="badge badge-green fw-light mb-3">Life cycle costing</span>
+                        <a href="{{ route('calculator-rbm') }}"
+                            class="badge badge-green text-decoration-none fw-light me-3 mb-3">Risk-bases
+                            maintenance</a>
+                        <a href="{{ route('calculator-lcc') }}"
+                            class="badge badge-green text-decoration-none fw-light mb-3">Life cycle
+                            costing</a>
                     </div>
                     <div class="col-md-6 mb-md-0 mb-3">
-                        <span class="badge badge-green fw-light">Overall Equipment Effectiveness</span>
+                        <a href="{{ route('calculator-oee') }}"
+                            class="badge badge-green text-decoration-none fw-light">Overall Equipment
+                            Effectiveness</a>
                     </div>
                 </div>
             </div>
