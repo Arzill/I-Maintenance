@@ -13,20 +13,36 @@
         <form action="{{ route('calculator-rbm.store') }}" method="POST">
             @csrf
             <div class="row">
+                @if ($errors->any())
+                <div class="alert alert-danger" role="alert">
+                    <ol>
+                        @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                        @endforeach
+                    </ol>
+                </div>
+                @endif
                 <div class="col-md-6">
                     <div class="row mb-3">
                         <div class="col-md-8">
                             <h5 class="fw-bold">Nama Mesin</h5>
                         </div>
                         <div class="col-md-4">
-                            <input type="text" name="nama_mesin" id="namaMesin"
-                                class="form-control @error('nama_mesin') is-invalid @enderror"
-                                placeholder="Nama mesin" />
-                            @error('nama_mesin')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                            @enderror
+                            @guest()
+                            <input type="text" name="nama_mesin"
+                                class="form-control me-1 @error('nama_mesin') is-invalid @enderror" />
+                            @endguest
+                            @auth
+                            <select class=" form-select @error('nama_mesin') is-invalid @enderror" name="nama_mesin"
+                                id="nama_mesin">
+                                <option disabled selected>Nama Mesin
+                                </option>
+                                @foreach($namaMesin as $nama)
+                                <option value="{{ $nama }}">{{ $nama }}
+                                </option>
+                                @endforeach
+                            </select>
+                            @endauth
                         </div>
                     </div>
                     <div class="row mb-3">
@@ -38,11 +54,6 @@
                                 class="form-control @error('jangka_waktu') is-invalid @enderror"
                                 placeholder="Jangka Waktu" />
                             <div class="form-text  fw-light">(Perbulan)</div>
-                            @error('jangka_waktu')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                            @enderror
                         </div>
                     </div>
                     <div class="row mb-3">
@@ -52,11 +63,6 @@
                         <div class="col-md-4">
                             <input type="text" maxlength="1" name="severity" id="severity"
                                 class="form-control @error('severity') is-invalid @enderror" placeholder="Skala 1-5" />
-                            @error('severity')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                            @enderror
                         </div>
                     </div>
                     <div class="row mb-3">
@@ -66,11 +72,6 @@
                         <div class="col-md-4">
                             <input type="text" maxlength="1" name="occurrence" id="occurrence" placeholder="Skala 1-5"
                                 class="form-control @error('occurrence') is-invalid @enderror" />
-                            @error('occurrence')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                            @enderror
                         </div>
                     </div>
                     @auth()

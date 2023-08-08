@@ -23,9 +23,14 @@ class LccExport implements FromQuery, WithHeadings, WithMapping, WithTitle, Shou
     public function query()
     {
         $userLogin = Auth::id();
-        return Lcc::query()->whereHas('maintenance', function ($query) use ($userLogin) {
-            $query->where('jenis_maintenance', 'lcc')->where('id_user', $userLogin);
-        });
+        if (Auth::user()->role === 'user') {
+            $query =  Lcc::query()->whereHas('maintenance', function ($query) use ($userLogin) {
+                $query->where('id_pengguna', $userLogin);
+            });
+        } else {
+            $query =  Lcc::query()->whereHas('maintenance');
+        }
+        return $query;
     }
     public function title(): string
     {
@@ -50,7 +55,7 @@ class LccExport implements FromQuery, WithHeadings, WithMapping, WithTitle, Shou
     {
         return [
             $this->number += 1,
-            \App\Helpers\DateHelper::getIndonesiaDate($lcc->updated_at),
+            \App\Helpers\DateHelper::getIndonesiaDate($lcc->created_at),
             $lcc->nama_mesin,
             "Rp " . round($lcc->biaya_inisiasi),
             "Rp " . round($lcc->biaya_operasional_tahunan),

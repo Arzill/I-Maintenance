@@ -15,10 +15,9 @@ return new class extends Migration
     {
         Schema::create('maintenances', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->uuid('id_user');
+            $table->uuid('id_pengguna');
             $table->string('nama_mesin');
-            $table->enum('jenis_maintenance', ['oee', 'rbm', 'lcc']);
-            $table->foreign('id_user')->references('id')->on('users');
+            $table->foreign('id_pengguna')->references('id')->on('users');
             $table->timestamps();
         });
     }

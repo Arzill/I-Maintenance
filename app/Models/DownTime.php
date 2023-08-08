@@ -6,10 +6,11 @@ use App\Traits\Uuid;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Oee extends Model
+class DownTime extends Model
 {
     use HasFactory, Uuid;
-    protected $table = 'oees';
+
+    protected $table = 'down_times';
     protected $guarded = ['id'];
 
     public function perhitunganOee()

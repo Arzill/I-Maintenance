@@ -18,7 +18,14 @@ class LccController extends Controller
 {
     public function index()
     {
-        return view('pages.calculator.lcc');
+        $userLogin = Auth::id();
+        if (Auth::check()) {
+            $maintenance  = Maintenance::where('id_pengguna', $userLogin);
+            $namaMesin = $maintenance->pluck('nama_mesin')->toArray();
+            return view('pages.calculator.lcc', compact('namaMesin'));
+        } else {
+            return view('pages.calculator.lcc');
+        }
     }
 
     public function store(LccRequest $request)
@@ -34,16 +41,21 @@ class LccController extends Controller
                 $lcc = $attr['biaya_inisiasi'] + ($attr['estimasi_tahunan'] * $attr['biaya_operasional_tahunan']) + ($attr['estimasi_tahunan'] * $attr['biaya_pemeliharaan_tahunan']) + $attr['biaya_pembongkaran'];
 
                 // Insert Data Maintenance
-                $maintenance = new Maintenance();
-                $maintenance->id_user = Auth::user()->id;
-                $maintenance->nama_mesin = $attr['nama_mesin'];
-                $maintenance->jenis_maintenance = 'lcc';
-                $maintenance->save();
-
+                $existingMaintenance = Maintenance::where('nama_mesin', $attr['nama_mesin'])->first();
+                if ($existingMaintenance) {
+                    // Jika sudah ada, gunakan data yang sudah ada
+                    $maintenance = $existingMaintenance;
+                } else {
+                    // Jika belum ada, buat data baru
+                    $maintenance = new Maintenance();
+                    $maintenance->id_pengguna = Auth::user()->id;
+                    $maintenance->nama_mesin = $attr['nama_mesin'];
+                    $maintenance->save();
+                }
 
                 // Insert Data Detail Maintenance
                 $data = new Lcc();
-                $data->id_maintenance = $maintenance->id;
+                $data->id_mesin = $maintenance->id;
                 $data->biaya_inisiasi = $attr['biaya_inisiasi'];
                 $data->biaya_operasional_tahunan = $attr['biaya_operasional_tahunan'];
                 $data->biaya_pemeliharaan_tahunan = $attr['biaya_pemeliharaan_tahunan'];
@@ -77,20 +89,15 @@ class LccController extends Controller
         try {
             if (Auth::check()) {
 
-                $lcc = Lcc::where('id_maintenance', $id)->first();
+                $lcc = Lcc::where('id_mesin', $id)->first();
 
-                $maintenance = Maintenance::where('id', $id)
-                    ->first();
+                // $maintenance = Maintenance::where('id', $id)
+                //     ->first();
 
                 DB::transaction(function () use ($lcc) {
                     $lcc->delete();
                 });
 
-                if ($maintenance) {
-                    DB::transaction(function () use ($maintenance) {
-                        $maintenance->delete();
-                    });
-                }
                 Alert::success('Sukses', 'Data Berhasil Dihapus');
                 return redirect()->back();
             } else {

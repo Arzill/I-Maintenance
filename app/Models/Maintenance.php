@@ -12,21 +12,21 @@ class Maintenance extends Model
     protected $primaryKey = 'id';
     protected $guarded = ['id'];
 
-    public function oee()
+    public function perhitunganOee()
     {
-        return $this->hasMany(Oee::class, 'id_maintenance');
+        return $this->hasMany(PerhitunganOEE::class, 'id_mesin', 'id');
     }
     public function rbm()
     {
-        return $this->hasMany(Rbm::class, 'id_maintenance');
+        return $this->hasMany(Rbm::class, 'id_mesin', 'id');
     }
     public function lcc()
     {
-        return $this->hasMany(Lcc::class, 'id_maintenance');
+        return $this->hasMany(Lcc::class, 'id_mesin', 'id');
     }
 
     public function user()
     {
-        return $this->belongsTo(User::class, 'id_user', 'id');
+        return $this->belongsTo(User::class, 'id_pengguna', 'id');
     }
 }

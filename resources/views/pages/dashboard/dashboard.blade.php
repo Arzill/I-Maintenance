@@ -10,7 +10,7 @@
                         <p class="text-dark-blue fw-medium">Ringkasan Maintenance</p>
                     </div>
                     <div class="col-md-auto">
-                        <a href="{{ route('home') }}" class="btn btn-success px-4">Kembali</a>
+                        <a href="" class="btn btn-success px-4">Kembali</a>
                     </div>
                 </div>
             </div>
@@ -59,32 +59,31 @@
                             </tr>
                         </thead>
                         <tbody>
-
-                            @forelse ($maintenance as $data )
+                            @forelse ($allData as $data)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ \App\Helpers\DateHelper::getIndonesiaDate($data->updated_at) }}</td>
+                                <td>{{ \App\Helpers\DateHelper::getIndonesiaDate($data->created_at) }}</td>
+                                <td>{{ $data->nama_mesin }}</td>
                                 <td>
-                                    {{ $data->nama_mesin }}
+                                    @if ($data->jenis_maintenance === 'OEE')
+                                    {{ round($data->oee->result_oee) }}%
+                                    @elseif ($data->jenis_maintenance === 'RBM')
+                                    {{ $data->result_rbm }}
+                                    @elseif ($data->jenis_maintenance === 'LCC')
+                                    Rp. {{ \App\Helpers\DateHelper::getFormatNumber($data->result_lcc) }}
+                                    @endif
                                 </td>
-                                @if ($data->jenis_maintenance === 'oee')
-                                <td>{{ round($data->oee->first()->result_oee) }}%</td>
-                                @elseif ($data->jenis_maintenance === 'rbm')
-                                <td>{{ $data->rbm->first()->result_rbm }}</td>
-                                @elseif ($data->jenis_maintenance === 'lcc')
-                                <td>Rp. {{ \App\Helpers\DateHelper::getFormatNumber($data->lcc->first()->result_lcc) }}
-                                </td>
-                                @endif
-                                <td class="text-center">{{ Str::upper($data->jenis_maintenance) }}</td>
+                                <td class="text-center">{{ $data->jenis_maintenance }}</td>
                             </tr>
                             @empty
                             <tr>
-                                <td colspan="6" class="text-center text-dark-blue">Tidak ada Data</td>
+                                <td colspan="5" class="text-center">Tidak ada data</td>
                             </tr>
                             @endforelse
                         </tbody>
                     </table>
-                    <x-pagination :pagination="$maintenance" />
+                    <x-pagination :pagination="$allData" />
+
                 </div>
             </div>
         </div>

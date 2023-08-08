@@ -1,4 +1,4 @@
-<div class="footer ">
+<footer class="footer">
     <div class="container pt-4 pb-2">
         <div class="row text-white">
             <div class="col-md-6 col-12">
@@ -32,4 +32,4 @@
         </div>
         <p class="text-center mt-3 copyright" style="color: #A7B1BD">Copyright © 2023 Ahyar All Rights Reserved</p>
     </div>
-</div>
+</footer>

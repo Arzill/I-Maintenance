@@ -10,6 +10,15 @@
 <section class="form-calculator">
     <div class="container">
         <div class="row">
+            @if ($errors->any())
+            <div class="alert alert-danger" role="alert">
+                <ol>
+                    @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                    @endforeach
+                </ol>
+            </div>
+            @endif
             <div class="col-md-6">
                 <form action="{{ route('calculator-lcc.store') }}" method="POST">
                     @csrf
@@ -18,14 +27,21 @@
                             <h5>Nama Mesin</h5>
                         </div>
                         <div class="col-md-4">
-                            <input type="text" name="nama_mesin" id="name"
-                                class="form-control @error('nama_mesin') is-invalid @enderror"
-                                placeholder="Masukkan nama mesin">
-                            @error('nama_mesin')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                            @enderror
+                            @guest()
+                            <input type="text" name="nama_mesin"
+                                class="form-control me-1 @error('nama_mesin') is-invalid @enderror" />
+                            @endguest
+                            @auth
+                            <select class=" form-select @error('nama_mesin') is-invalid @enderror" name="nama_mesin"
+                                id="nama_mesin">
+                                <option disabled selected>Nama Mesin
+                                </option>
+                                @foreach($namaMesin as $nama)
+                                <option value="{{ $nama }}">{{ $nama }}
+                                </option>
+                                @endforeach
+                            </select>
+                            @endauth
                         </div>
                     </div>
                     <div class="row mb-3">
@@ -38,11 +54,7 @@
                                 <input type="number" name="biaya_inisiasi" id="inisiasi"
                                     class="form-control count @error('biaya_inisiasi') is-invalid @enderror"
                                     placeholder="0">
-                                @error('biaya_inisiasi')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                                @enderror
+
                             </div>
                         </div>
                     </div>
@@ -56,11 +68,6 @@
                                 <input type="number" name="biaya_operasional_tahunan" id="operasional"
                                     class="form-control count @error('biaya_operasional_tahunan') is-invalid @enderror"
                                     placeholder="0">
-                                @error('biaya_operasional_tahunan')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                                @enderror
                             </div>
                         </div>
                     </div>
@@ -74,11 +81,6 @@
                                 <input type="number" name="biaya_pemeliharaan_tahunan" id="pemeliharaan"
                                     class="form-control count @error('biaya_pemeliharaan_tahunan') is-invalid @enderror"
                                     placeholder="0">
-                                @error('biaya_pemeliharaan_tahunan')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                                @enderror
                             </div>
                         </div>
                     </div>
@@ -92,11 +94,6 @@
                                 <input type="number" name="biaya_pembongkaran" id="pembongkaran"
                                     class="form-control count @error('biaya_pembongkaran') is-invalid @enderror"
                                     placeholder="0">
-                                @error('biaya_pembongkaran')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                                @enderror
                             </div>
                         </div>
                     </div>
@@ -108,11 +105,6 @@
                             <input type="number" name="estimasi_tahunan" id="estimasi"
                                 class="form-control @error('estimasi_tahunan') is-invalid @enderror" placeholder="0">
                             <div class="form-text float-end fw-light">(dalam bentuk tahun)</div>
-                            @error('estimasi_tahunan')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                            @enderror
                         </div>
                     </div>
                     @auth
@@ -242,10 +234,11 @@
             LCC dapat digunakan untuk membandingkan biaya total dari vendor ataupun mesin yang berbeda.</p>
     </div>
 </section>
+@section('script')
 <script>
     $(document).ready(function() {
             var total = 0;
-            $("#inisiasi, #operasional, #pemeliharaan, #pembongkaran, #estimasi").keyup(function() {
+            $("#inisiasi, #operasional, #pemeliharaan, #pembongkaran, #estimasi").change(function() {
                 var i = Number($("#inisiasi").val());
                 var o = Number($("#operasional").val());
                 var p = Number($("#pemeliharaan").val());
@@ -258,4 +251,5 @@
             $("#result").html(total);
         })
 </script>
+@endsection
 @endsection

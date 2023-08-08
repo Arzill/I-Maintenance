@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('lccs', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignUuid('id_maintenance')->references('id')->on('maintenances');
+            $table->foreignUuid('id_mesin')->references('id')->on('maintenances');
             // $table->string('nama_mesin');
             $table->decimal('biaya_inisiasi', 12, 2)->default(0);
             $table->decimal('biaya_operasional_tahunan', 12, 2)->default(0);

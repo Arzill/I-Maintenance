@@ -22,7 +22,14 @@ class RbmController extends Controller
      */
     public function index()
     {
-        return view('pages.calculator.rbm');
+        $userLogin = Auth::id();
+        if (Auth::check()) {
+            $maintenance  = Maintenance::where('id_pengguna', $userLogin);
+            $namaMesin = $maintenance->pluck('nama_mesin')->toArray();
+            return view('pages.calculator.rbm', compact('namaMesin'));
+        } else {
+            return view('pages.calculator.rbm');
+        }
     }
 
     /**
@@ -47,14 +54,20 @@ class RbmController extends Controller
             if (Auth::check()) {
                 DB::beginTransaction();
                 $attr = $request->validated();
-                $maintenance = new Maintenance();
-                $maintenance->id_user = Auth::user()->id;
-                $maintenance->nama_mesin = $attr['nama_mesin'];
-                $maintenance->jenis_maintenance = 'rbm';
-                $maintenance->save();
+                $existingMaintenance = Maintenance::where('nama_mesin', $attr['nama_mesin'])->first();
+                if ($existingMaintenance) {
+                    // Jika sudah ada, gunakan data yang sudah ada
+                    $maintenance = $existingMaintenance;
+                } else {
+                    // Jika belum ada, buat data baru
+                    $maintenance = new Maintenance();
+                    $maintenance->id_pengguna = Auth::user()->id;
+                    $maintenance->nama_mesin = $attr['nama_mesin'];
+                    $maintenance->save();
+                }
 
                 $data = new Rbm();
-                $data->id_maintenance = $maintenance->id;
+                $data->id_mesin = $maintenance->id;
                 $data->jangka_waktu = $attr['jangka_waktu'];
                 $data->severity = $attr['severity'];
                 $data->occurrence = $attr['occurrence'];
@@ -124,19 +137,14 @@ class RbmController extends Controller
     {
         try {
             if (Auth::check()) {
-                $detailMaintenance = Rbm::where('id_maintenance', $id);
+                $rbm = Rbm::where('id_mesin', $id);
 
-                $maintenance = Maintenance::where('id', $id)->first();
+                // $maintenance = Maintenance::where('id', $id)->first();
 
-                DB::transaction(function () use ($detailMaintenance) {
-                    $detailMaintenance->delete();
+                DB::transaction(function () use ($rbm) {
+                    $rbm->delete();
                 });
 
-                if ($maintenance) {
-                    DB::transaction(function () use ($maintenance) {
-                        $maintenance->delete();
-                    });
-                }
                 Alert::success('Sukses', 'Data Berhasil Dihapus');
                 return redirect()->back();
             } else {

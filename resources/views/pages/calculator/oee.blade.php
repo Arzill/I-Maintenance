@@ -11,124 +11,197 @@
 <section class="form-calculator">
     <div class="container">
         <div class="row">
+            @if ($errors->any())
+            <div class="alert alert-danger" role="alert">
+                <ol>
+                    @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                    @endforeach
+                </ol>
+            </div>
+            @endif
             <div class="col-md-6">
                 <form action="{{ route('calculator-oee.store') }}" method="POST">
                     @csrf
-                    <div class="row mb-3">
-                        <div class="col-md-8">
-                            <h5>Nama Mesin</h5>
+                    <div class="row mb-3 align-items-center">
+                        <div class="col-md-5">
+                            <h5 class="fw-bold">Nama Mesin</h5>
                         </div>
-                        <div class="col-md-4">
-                            <input type="text" name="nama_mesin" id="nama_mesin"
-                                class="form-control @error('nama_mesin') is-invalid @enderror" />
-                            @error('nama_mesin')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                            @enderror
-                        </div>
-                    </div>
-                    <div class="row mb-3">
-                        <div class="col-md-8">
-                            <h5>Shift Start</h5>
-                        </div>
-                        <div class="col-md-4">
-                            <input type="time" name="shift_start" id="shiftstart"
-                                class="form-control @error('shift_start') is-invalid @enderror" />
-                            @error('shift_start')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                            @enderror
+                        <div class="col-md-7">
+                            @guest()
+                            <input type="text" name="nama_mesin"
+                                class="form-control me-1 @error('nama_mesin') is-invalid @enderror" />
+                            @endguest
+                            @auth
+                            <select class=" form-select @error('nama_mesin') is-invalid @enderror" name="nama_mesin"
+                                id="nama_mesin">
+                                <option disabled selected>Nama Mesin
+                                </option>
+                                @foreach($namaMesin as $nama)
+                                <option value="{{ $nama }}">{{ $nama }}
+                                </option>
+                                @endforeach
+                            </select>
+                            @endauth
                         </div>
                     </div>
-                    <div class="row mb-3">
-                        <div class="col-md-8">
-                            <h5>Shift End</h5>
+                    <div class="row mb-3 align-items-center">
+                        <div class="col-md-5">
+                            <h5 class="fw-bold">Waktu Produksi</h5>
                         </div>
-                        <div class="col-md-4">
-                            <input type="time" name="shift_end" id="shiftend"
-                                class="form-control @error('shift_end') is-invalid @enderror" />
-                            @error('shift_end')
-                            <div class="invalid-feedback">
-                                {{ $message }}
+                        <div class="col-md-4 pe-1 ">
+                            <div class="d-flex align-items-center">
+                                <input type="time" name="waktu_mulai_produksi" id="waktuMulai"
+                                    class="form-control me-1 @error('waktu_mulai_produksi') is-invalid @enderror"
+                                    value="{{ old('waktu_mulai_produksi') }}" />
+                                <span>Sampai</span>
                             </div>
-                            @enderror
+                        </div>
+                        <div class="col-md-3">
+                            <input type="time" name="waktu_selesai_produksi" id="waktuSelesai"
+                                class="form-control @error('waktu_selesai_produksi') is-invalid @enderror"
+                                value="{{ old('waktu_selesai_produksi') }}" />
                         </div>
                     </div>
-                    <div class="row mb-3">
-                        <div class="col-md-8">
-                            <h5>Planned Downtime</h5>
+                    <div class="row mb-3 align-items-center">
+                        <div class="col-md-5">
+                            <h5 class="fw-bold">Down Time</h5>
                         </div>
-                        <div class="col-md-4">
-                            <input type="number" name="planned_downtime" id="planned"
-                                class="form-control @error('planned_downtime') is-invalid @enderror" />
-                            <div class="form-text fw-light">(minute)</div>
-                            @error('planned_downtime')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                            @enderror
-                        </div>
-                    </div>
-                    <div class="row mb-3">
-                        <div class="col-md-8">
-                            <h5>Unplanned Downtime</h5>
-                        </div>
-                        <div class="col-md-4">
-                            <input type="number" name="unplanned_downtime" id="unplanned"
-                                class="form-control @error('unplanned_downtime') is-invalid @enderror" />
-                            <div class="form-text fw-light">(minute)</div>
-                            @error('unplanned_downtime')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                            @enderror
-                        </div>
-                    </div>
-                    <div class="row mb-3">
-                        <div class="col-md-8">
-                            <h5>Total Parts Produced</h5>
-                        </div>
-                        <div class="col-md-4">
-                            <input type="number" name="total_parts_produced" id="total"
-                                class="form-control @error('total_parts_produced') is-invalid @enderror" />
-                            <div class="form-text fw-light">(Pieces)</div>
-                            @error('total_parts_produced')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                            @enderror
+                        <div class="col-md-7">
+                            <select class="form-select" aria-label="Default select example" name="jenis_downtime">
+                                <option disabled selected>Jenis Down Time</option>
+                                <option value="Kerusakan mesin atau peralatan yang tidak terduga" {{
+                                    old('jenis_downtime')=='Kerusakan mesin atau peralatan yang tidak terduga'
+                                    ? 'selected' : '' }}>Kerusakan mesin atau
+                                    peralatan yang tidak terduga </option>
+                                <option value="Kerusakan atau keausan komponen" {{
+                                    old('jenis_downtime')=='Kerusakan atau keausan komponen' ? 'selected' : '' }}>
+                                    Kerusakan atau keausan komponen</option>
+                                <option value="Gangguan listrik atau pemadaman" {{
+                                    old('jenis_downtime')=='Gangguan listrik atau pemadaman' ? 'selected' : '' }}>
+                                    Gangguan listrik atau pemadaman</option>
+                                <option value="Kehabisan Bahan Baku" {{ old('jenis_downtime')=='Kehabisan Bahan Baku'
+                                    ? 'selected' : '' }}>
+                                    Kehabisan Bahan Baku</option>
+                                <option value="Kerusakan dan penggantian suku cadang" {{
+                                    old('jenis_downtime')=='Kehabisan Bahan Baku' ? 'selected' : '' }}>Kerusakan dan
+                                    penggantian suku
+                                    cadang</option>
+                                <option value="Penurunan Kualitas" {{ old('jenis_downtime')=='Penurunan Kualitas'
+                                    ? 'selected' : '' }}>Penurunan Kualitas</option>
+                                <option value="Penurunan Kecepatan" {{ old('jenis_downtime')=='Penurunan Kecepatan'
+                                    ? 'selected' : '' }}>Penurunan Kecepatan</option>
+                                <option value="Gangguan dan Peristiwa Tidak Terduga" {{
+                                    old('jenis_downtime')=='Gangguan dan Peristiwa Tidak Terduga' ? 'selected' : '' }}>
+                                    Gangguan dan
+                                    Peristiwa Tidak
+                                    Terduga</option>
+                                <option value="Gangguan minor pada mesin atau alat" {{
+                                    old('jenis_downtime')=='Gangguan minor pada mesin atau alat' ? 'selected' : '' }}>
+                                    Gangguan minor
+                                    pada mesin atau alat
+                                </option>
+                                <option value="Lain-lainnya" {{ old('jenis_downtime')=='Lain-lainnya' ? 'selected' : ''
+                                    }}>Lain-lainnya</option>
+                            </select>
                         </div>
                     </div>
-                    <div class="row mb-3">
-                        <div class="col-md-8">
-                            <h5>Ideal Run Rate</h5>
-                        </div>
-                        <div class="col-md-4">
-                            <input type="number" name="ideal_run_rate" id="idealRunRate"
-                                class="form-control @error('ideal_run_rate') is-invalid @enderror" />
-                            <div class="form-text fw-light">(Pieces Per Minute)</div>
-                            @error('ideal_run_rate')
-                            <div class="invalid-feedback">
-                                {{ $message }}
+                    <div class="row mb-3 justify-content-end align-items-center">
+                        <div class="col-md-4 pe-1 ">
+                            <div class="d-flex align-items-center">
+                                <input type="time" name="jam_mulai_downtime" id="mulaiDowntime"
+                                    class="form-control me-1 @error('jam_mulai_dowstime') is-invalid @enderror"
+                                    value="{{ old('jam_mulai_downtime') }}" />
+                                <span>Sampai</span>
                             </div>
-                            @enderror
+                        </div>
+                        <div class="col-md-3">
+                            <input type="time" name="jam_selesai_downtime" id="selesaiDowntime"
+                                class="form-control @error('jam_selesai_downtime') is-invalid @enderror"
+                                value="{{ old('jam_selesai_downtime') }}" />
                         </div>
                     </div>
-                    <div class="row mb-3">
-                        <div class="col-md-8">
-                            <h5>Total Scrap</h5>
+                    <div class="row mb-3 align-items-center">
+                        <div class="col-md-5">
+                            <h5 class="fw-bold">Downtime Terencana</h5>
                         </div>
-                        <div class="col-md-4">
-                            <input type="number" name="total_scrap" id="scrap"
-                                class="form-control @error('total_scrap') is-invalid @enderror" />
-                            <div class="form-text  fw-light">(Pieces)</div>
-                            @error('total_scrap')
-                            <div class="invalid-feedback">
-                                {{ $message }}
+                        <div class="col-md-4 pe-1 ">
+                            <div class="d-flex align-items-center">
+                                <input type="time" name="mulai_downtime_terencana" id="mulaiTerencana"
+                                    class="form-control me-1 @error('mulai_downtime_terencana') is-invalid @enderror"
+                                    value="{{ old('mulai_downtime_terencana') }}" />
+                                <span>Sampai</span>
                             </div>
-                            @enderror
+                        </div>
+                        <div class="col-md-3">
+                            <input type="time" name="selesai_downtime_terencana" id="selesaiTerencana"
+                                class="form-control @error('selesai_downtime_terencana') is-invalid @enderror"
+                                value="{{ old('selesai_downtime_terencana') }}" />
+                        </div>
+                    </div>
+                    <div class="row mb-3 align-items-center">
+                        <div class="col-md-5">
+                            <h5 class="fw-bold">Waktu Total Produksi</h5>
+                        </div>
+                        <div class="col-md-5">
+                            <div class="input-group">
+                                <input type="number" name="waktu_total_produksi" id="waktuTotalProduksi" value=""
+                                    class="form-control border bg-dark-subtle  @error('waktu_total_produksi') is-invalid @enderror"
+                                    readonly placeholder="0">
+                                <span class="input-group-text bg-dark-subtle">Menit</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-3 align-items-center">
+                        <div class="col-md-5">
+                            <h5 class="fw-bold">Total Produksi</h5>
+                        </div>
+                        <div class="col-md-7">
+                            <div class="input-group">
+                                <input type="number" name="total_produksi" id="totalProduksi"
+                                    class="form-control border count @error('total_produksi') is-invalid @enderror"
+                                    value="{{ old('total_produksi') }}" placeholder="0">
+                                <span class="input-group-text bg-dark-subtle">Unit</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-3 align-items-center">
+                        <div class="col-md-5">
+                            <h5 class="fw-bold">Tingkat Produksi Ideal</h5>
+                        </div>
+                        <div class="col-md-7">
+                            <div class="input-group">
+                                <input type="number" name="tingkat_produksi_ideal" id="tingkatProduksiIdeal"
+                                    class="form-control border count @error('tingkat_produksi_ideal') is-invalid @enderror"
+                                    value="{{ old('tingkat_produksi_ideal') }}" placeholder="0">
+                                <span class="input-group-text bg-dark-subtle">Unit/Menit</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-3 align-items-center">
+                        <div class="col-md-5">
+                            <h5 class="fw-bold">Produksi Cacat / Gagal</h5>
+                        </div>
+                        <div class="col-md-7">
+                            <div class="input-group">
+                                <input type="number" name="produksi_cacat" id="produksiCacat"
+                                    class="form-control border count @error('produksi_cacat') is-invalid @enderror"
+                                    value="{{ old('produksi_cacat') }}" placeholder="0">
+                                <span class="input-group-text bg-dark-subtle">Unit</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-3 align-items-center">
+                        <div class="col-md-5">
+                            <h5 class="fw-bold">Produksi Baik</h5>
+                        </div>
+                        <div class="col-md-5">
+                            <div class="input-group">
+                                <input type="number" name="produksi_baik" id="produksiBaik"
+                                    class="form-control border bg-dark-subtle @error('produksi_baik') is-invalid @enderror"
+                                    readonly placeholder="0" value="">
+                                <span class="input-group-text bg-dark-subtle">Unit</span>
+                            </div>
                         </div>
                     </div>
                     @auth()
@@ -151,7 +224,7 @@
                     </div>
                     <div class="col-md-4 col-4 mb-3 ">
                         <div class="card result bg-dark-blue">
-                            <h5 class="text-white text-center title child fw-bold">Performance</h5>
+                            <h4 class="text-white text-center title child fw-bold">Performance</h4>
                             <h3 class="text-white text-center fw-bold"><span id="result_performance"
                                     class="fw-bold">0</span>%
                             </h3>
@@ -159,14 +232,15 @@
                     </div>
                     <div class="col-md-4 col-4 mb-3 ">
                         <div class="card result bg-dark-blue">
-                            <h5 class="text-white text-center title child fw-bold">Quality</h5>
+                            <h4 class="text-white text-center title child fw-bold">Quality</h4>
                             <h3 class="text-white text-center fw-bold"><span id="result_quality"
-                                    class="fw-bold">0</span>%</h3>
+                                    class="fw-bold">0</span>%
+                            </h3>
                         </div>
                     </div>
                     <div class="col-md-4 col-4 mb-3 ">
                         <div class="card result bg-dark-blue">
-                            <h5 class="text-white text-center title child fw-bold">Availability</h5>
+                            <h4 class="text-white text-center title child fw-bold">Availability</h4>
                             <h3 class="text-white text-center fw-bold"><span id="result_availability"
                                     class="fw-bold">0</span>%
                             </h3>
@@ -276,36 +350,59 @@
 @section('script')
 <script>
     $(document).ready(function() {
+
+          // Mengubah waktu ke dalam menit dengan format AM dan PM
+          function getMinuteDifference(start, end) {
+                if (!start || !start.includes(':') || !end || !end.includes(':')) {
+                    return 0; // Return 0 for invalid or empty time format
+                }
+
+                let startParts = start.split(':');
+                let endParts = end.split(':');
+                let startHours = parseInt(startParts[0]);
+                let startMinutes = parseInt(startParts[1]);
+                let endHours = parseInt(endParts[0]);
+                let endMinutes = parseInt(endParts[1]);
+
+                let startInMinutes = startHours * 60 + startMinutes;
+                let endInMinutes = endHours * 60 + endMinutes;
+
+                return endInMinutes - startInMinutes;
+            }
+
             function calculateOEE() {
                 // Ambil nilai dari input
-                let shiftStart = getTimeValue($('#shiftstart').val());
-                let shiftEnd = getTimeValue($('#shiftend').val());
-                let plannedDowntime = parseInt($('#planned').val());
-                let unplannedDowntime = parseInt($('#unplanned').val());
-                let totalPartsProduced = parseInt($('#total').val());
-                let idealRunRate = parseInt($('#idealRunRate').val());
-                let totalScrap = parseInt($('#scrap').val());
-                // Hitung nilai Shift Length
-                let shiftLength = calculateShiftLength(shiftStart, shiftEnd);
+                let waktuMulai = $('#waktuMulai').val();
+                let waktuSelesai = $('#waktuSelesai').val();
+                let mulaiDowntime = $('#mulaiDowntime').val();
+                let selesaiDowntime = $('#selesaiDowntime').val();
+                let mulaiTerencana = $('#mulaiTerencana').val();
+                let selesaiTerencana = $('#selesaiTerencana').val();
+                let totalProduksi = parseInt($('#totalProduksi').val());
+                let tingkatProduksiIdeal = parseInt($('#tingkatProduksiIdeal').val());
+                let produksiCacat = parseInt($('#produksiCacat').val());
 
-                // Hitung nilai Planned Production Time
-                let plannedProductionTime = shiftLength - plannedDowntime;
+                // Menghitung selisih waktu
+                let sisaWaktu = getMinuteDifference(waktuMulai,waktuSelesai);
+                let downTime = getMinuteDifference(mulaiDowntime,selesaiDowntime);
+                let downTimeTerencana = getMinuteDifference(mulaiTerencana,selesaiTerencana);
+                let waktuTotalProduksi = sisaWaktu - downTime - downTimeTerencana;
 
-                // Hitung nilai Operating Time
-                let operatingTime = plannedProductionTime - unplannedDowntime;
-
-              // Hitung nilai Availability
-                let availability = (operatingTime / plannedProductionTime) * 100;
+                // Hitung nilai Availability
+                let availability = (waktuTotalProduksi / sisaWaktu) * 100;
                 availability = isNaN(availability) ? 0 : availability;
                 availability = Math.round(Math.max(Math.min(availability, 100), 0));
 
                 // Hitung nilai Performance
-                let performance = (totalPartsProduced / operatingTime) / idealRunRate;
+                let totalWaktuPerformance = (totalProduksi / (waktuTotalProduksi));
+                let performance = totalWaktuPerformance / tingkatProduksiIdeal;
                 performance = isNaN(performance) ? 0 : performance;
                 performance = Math.round(Math.max(Math.min(performance * 100, 100), 0));
 
+
                 // Hitung nilai Quality
-                let quality = (totalPartsProduced - totalScrap) / totalPartsProduced;
+                let produksiBaik = totalProduksi - produksiCacat;
+                let quality = produksiBaik / totalProduksi;
                 quality = isNaN(quality) ? 0 : quality;
                 quality = Math.round(Math.max(Math.min(quality * 100, 100), 0));
 
@@ -314,9 +411,9 @@
                 oee = isNaN(oee) ? 0 : oee;
                 oee = Math.round(Math.max(Math.min(oee * 100, 100), 0));
 
-
-
                 // Tampilkan hasil ke result
+                $('#waktuTotalProduksi').val(waktuTotalProduksi);
+                $('#produksiBaik').val(produksiBaik);
                 $('#result_availability').text(availability);
                 $('#result_performance').text(performance);
                 $('#result_quality').text(quality);
@@ -326,41 +423,19 @@
                 const keterangan = $('#keterangan')
                 if (oee === 0) {
                     keterangan.addClass('d-none');
-                } else if (oee > 60) {
+                } else if (oee >= 85) {
                     keterangan.removeClass('d-none');
                     keterangan.removeClass('bg-danger');
                     keterangan.addClass('bg-secondary').text('Mesin anda bekerja dengan baik')
-                } else if (oee < 60) {
+                } else if (oee < 85) {
                     keterangan.removeClass('d-none');
                     keterangan.removeClass('bg-secondary');
                     keterangan.addClass('bg-danger').text('Harap untuk mengecek Mesin anda')
                 }
             }
-            // Mengubah waktu ke dalam menit dengan format AM dan PM
-            function getTimeValue(time) {
-                let parts = time.split(':');
-                let hours = parseInt(parts[0]);
-                let minutes = parseInt(parts[1]);
 
-                if (hours === 12 && time.includes('AM')) {
-                    hours = 0; // Midnight
-                } else if (hours !== 12 && time.includes('PM')) {
-                    hours += 12; // Afternoon
-                }
 
-                return (hours * 60) + minutes;
-            }
-
-            // Menghitung Shift Length dengan memperhitungkan format waktu AM dan PM
-            function calculateShiftLength(start, end) {
-                if (end < start) {
-                    end += 24 * 60; // Tambah 1 hari (24 jam) jika Shift End berada di hari berikutnya
-                }
-
-                return end - start;
-            }
-
-            $('#shiftstart, #shiftend, #planned, #unplanned, #total, #idealRunRate, #scrap').change(function() {
+            $('#waktuMulai, #waktuSelesai, #mulaiDowntime, #selesaiDowntime, #mulaiTerencana, #selesaiTerencana, #totalProduksi, #tingkatProduksiIdeal, #produksiCacat').change(function() {
                 calculateOEE();
             });
 

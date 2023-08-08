@@ -17,15 +17,7 @@ class UserFactory extends Factory
      */
     public function definition()
     {
-        return [
-            'name' => 'Admin',
-            'email' => 'super.admin@admin.com',
-            'email_verified_at' => now(),
-            'password' => bcrypt('admin'), // password
-            'role' => 'admin', // password
-            'remember_token' => Str::random(10),
-            'posisi' => 'admin',
-        ];
+        return [];
     }
 
     /**

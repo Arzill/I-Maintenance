@@ -12,7 +12,7 @@ class Rbm extends Model
 
     public function maintenance()
     {
-        return $this->belongsTo(Maintenance::class, 'id_maintenance');
+        return $this->belongsTo(Maintenance::class, 'id_mesin');
     }
 
     public function scopeFilter($query, $params)

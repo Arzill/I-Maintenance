@@ -41,6 +41,12 @@
                                                 Riwayat OEE</a>
                                         </li>
                                         <li class="mb-2">
+                                            <a class="nav-link {{ request()->routeIs('downtime') ? 'fw-bold' : 'fw-medium ' }}"
+                                                href="{{ route('downtime') }}"><img
+                                                    src="{{ asset('assets/images/icon/calendar-check.svg') }}" alt="">
+                                                Riwayat Downtime</a>
+                                        </li>
+                                        <li class="mb-2">
                                             <a class="nav-link {{ request()->routeIs('lcc') ? 'fw-bold' : 'fw-medium ' }}"
                                                 href="{{ route('lcc') }}"><img
                                                     src="{{ asset('assets/images/icon/flag.svg') }}" alt="">

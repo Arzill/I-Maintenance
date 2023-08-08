@@ -21,9 +21,15 @@ class RbmExport implements FromQuery, WithHeadings, WithMapping, WithTitle, Shou
     public function query()
     {
         $userLogin = Auth::id();
-        return Rbm::query()->whereHas('maintenance', function ($query) use ($userLogin) {
-            $query->where('jenis_maintenance', 'rbm')->where('id_user', $userLogin);
-        });
+        if (Auth::user()->role === 'user') {
+            $query =  Rbm::query()->whereHas('maintenance', function ($query) use ($userLogin) {
+                $query->where('id_pengguna', $userLogin);
+            });
+        } else {
+            $query =  Rbm::query()->whereHas('maintenance');
+        }
+
+        return $query;
     }
     public function title(): string
     {
@@ -48,7 +54,7 @@ class RbmExport implements FromQuery, WithHeadings, WithMapping, WithTitle, Shou
     {
         return [
             $this->number += 1,
-            \App\Helpers\DateHelper::getIndonesiaDate($rbm->updated_at),
+            \App\Helpers\DateHelper::getIndonesiaDate($rbm->created_at),
             $rbm->maintenance->nama_mesin,
             $rbm->jangka_waktu,
             $rbm->severity,

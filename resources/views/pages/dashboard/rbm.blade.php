@@ -27,14 +27,22 @@
                             <x-ordering />
                         </div>
                         <div class="col-md-auto d-flex">
-                            <div class="input-group input-group-sm mb-3">
-                                <input type="search" id="search" name="search" class="form-control me-3"
-                                    placeholder="Search..." alue="{{ old('search', @$_GET['search']) }}"
-                                    aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
-                                <a href="{{ route('calculator-rbm.export') }}" class="btn btn-primary btn-sm">Cetak</a>
-
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="input-group mb-3">
+                                        <input type="search" id="search" name="search"
+                                            class="form-control form-control-sm " placeholder="Search.."
+                                            value="{{ old('search', @$_GET['search']) }}"
+                                            aria-label="Sizing example input">
+                                        <button class="input-group-text "><i class="fa fa-search "
+                                                aria-hidden="true"></i></button>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 ">
+                                    <a href="{{ route('calculator-rbm.export') }}"
+                                        class="btn btn-primary rounded">Cetak</a>
+                                </div>
                             </div>
-
                         </div>
                     </div>
                 </form>
@@ -58,7 +66,7 @@
                             @forelse ($rbm as $data)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ \App\Helpers\DateHelper::getIndonesiaDate($data->updated_at) }}</td>
+                                <td>{{ \App\Helpers\DateHelper::getIndonesiaDate($data->created_at) }}</td>
                                 <td>{{ $data->maintenance->nama_mesin }}</td>
                                 <td>{{ $data->jangka_waktu }} Bulan</td>
                                 <td>{{ $data->severity }}</td>
@@ -75,7 +83,7 @@
                                 <td>
                                     <button class="btn btn-danger btn-sm  btn-delete" data-user-id="{{ $data->id }}"
                                         data-username="{{ $data->maintenance->nama_mesin }}"
-                                        data-url="{{ route('calculator-rbm.delete', $data->id_maintenance) }}"
+                                        data-url="{{ route('calculator-rbm.delete', $data->id_mesin) }}"
                                         data-bs-toggle="modal" data-bs-target="#deleteModal"><i
                                             class="fa-solid fa-trash"></i></button>
                                 </td>

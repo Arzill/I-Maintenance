@@ -5,6 +5,7 @@ use App\Http\Controllers\Calculator\OeeController;
 use App\Http\Controllers\GuestController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Calculator\RbmController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PenggunaController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -36,11 +37,13 @@ Route::get('/about-us', function () {
 })->name('aboutUs');
 
 // User Dashboard
-Route::get('/dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
-Route::get('/riwayat-rbm', [HomeController::class, 'rbm'])->name('rbm');
-Route::get('/riwayat-oee', [HomeController::class, 'oee'])->name('oee');
-Route::get('/riwayat-lcc', [HomeController::class, 'lcc'])->name('lcc');
-Route::get('/settings', [HomeController::class, 'settings'])->name('settings');
+Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
+Route::get('/riwayat-oee', [DashboardController::class, 'oee'])->name('oee');
+Route::get('/riwayat-downtime', [DashboardController::class, 'downtime'])->name('downtime');
+Route::post('/riwayat-downtime/export', [DashboardController::class, 'exportDowntime'])->name('downtime.export');
+Route::get('/riwayat-rbm', [DashboardController::class, 'rbm'])->name('rbm');
+Route::get('/riwayat-lcc', [DashboardController::class, 'lcc'])->name('lcc');
+Route::get('/settings', [DashboardController::class, 'settings'])->name('settings');
 Route::patch('/settings/update/{id}', [PenggunaController::class, 'updateSettings'])->name('update-settings');
 Route::patch('/settings/updatePassword/{id}', [PenggunaController::class, 'updatePassword'])->name('update-password');
 
@@ -49,7 +52,7 @@ Route::prefix('oee')->group(function () {
     Route::get('/', [OeeController::class, 'index'])->name('calculator-oee');
     Route::post('store', [OeeController::class, 'store'])->name('calculator-oee.store');
     Route::delete('delete/{id}', [OeeController::class, 'destroy'])->name('calculator-oee.delete');
-    Route::get('export', [OeeController::class, 'exportOee'])->name('calculator-oee.export');
+    Route::post('export', [OeeController::class, 'exportOee'])->name('calculator-oee.export');
 });
 
 

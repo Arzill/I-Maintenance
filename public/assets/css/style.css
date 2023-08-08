@@ -108,6 +108,139 @@ p {
 /* End Button */
 
 
+/* Menghilangkan arrow default pada select */
+.custom-select::-ms-expand {
+    display: none;
+}
+
+/* Menambahkan custom arrow menggunakan ikon */
+.custom-select {
+    position: relative;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    border: 1px solid #ccc;
+    padding: 8px 24px 8px 8px;
+    border-radius: 4px;
+    font-size: 14px;
+    background-image: url("../images/icon/sort-solid.svg");
+    /* Ganti dengan path ikon arrow */
+    background-repeat: no-repeat;
+    background-position: right 8px center;
+    /* Atur posisi ikon arrow */
+}
+
+/* Style untuk saat select di-hover */
+.custom-select:hover {
+    cursor: pointer;
+}
+
+
+/* Style untuk Select2 container */
+.select2-container {
+    width: 100% !important;
+}
+
+/* Style untuk Select2 selection */
+.select2-container .select2-selection--single {
+    height: auto;
+    padding: 8px 24px 8px 8px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Style untuk Select2 selection saat mendapatkan fokus */
+.select2-container .select2-selection--single:focus {
+    border-color: #80bdff;
+    outline: 0;
+}
+
+/* Style untuk dropdown Select2 */
+.select2-container .select2-results__option--highlighted[aria-selected] {
+    background-color: #80bdff;
+    color: #fff;
+}
+
+/* Override Select2's z-index to ensure it displays properly */
+.select2-container--default .select2-results__option,
+.select2-dropdown {
+    z-index: 9999;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+    color: #000;
+    line-height: 1.5;
+}
+
+.select2-container {
+    width: 100% !important;
+}
+
+.custom-select2 .select2-container--default .select2-selection--single .select2-selection__rendered {
+    color: #000;
+    line-height: 1.5;
+}
+
+.custom-select2 .select2-container--default .select2-selection--single .select2-selection__placeholder {
+    color: #000;
+}
+
+.custom-select2 .select2-container .select2-selection--single .select2-selection__rendered {
+    display: block;
+    padding-left: 7px;
+    padding-right: 20px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.custom-select2 .select2-container--default .select2-selection--single .select2-selection__arrow {
+    height: 24px;
+    position: absolute;
+    top: 5px;
+    right: -18px;
+    width: 35px;
+}
+
+.custom-select2 .select2-container--default .select2-selection--single .select2-selection__arrow b {
+    background-image: url("../images/icon/sort-solid.svg");
+    background-repeat: no-repeat;
+    background-position: 0;
+    background-color: transparent;
+    background-size: inherit;
+    border: none !important;
+    height: 29px !important;
+    width: 7px !important;
+    /* margin: auto !important; */
+    top: auto !important;
+    left: auto !important;
+}
+
+.input-group {
+    display: flex;
+    align-content: stretch;
+}
+
+.input-group>input {
+    flex: 1 0 auto;
+}
+
+.input-group-addon {
+    background: #eee;
+    border: 1px solid #ccc;
+    padding: 0.5em 1em;
+}
+
+/* input[type="time"]::-webkit-calendar-picker-indicator {
+    background-color: #E9ECEF;
+    border: 1px #CED4DA solid;
+    background-image: url('../images/icon/stopwatch-fill.svg');
+    background-repeat: no-repeat;
+    background-size: contain;
+    cursor: pointer;
+} */
+
 /* Auth */
 
 #auth {

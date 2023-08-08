@@ -54,7 +54,7 @@ class User extends Authenticatable
 
     public function maintenance()
     {
-        return $this->hasMany(Maintenance::class, 'id_user', 'id');
+        return $this->hasMany(Maintenance::class, 'id_pengguna', 'id');
     }
 
     public function scopeFilter($query, $params)

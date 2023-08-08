@@ -13,15 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('rbms', function (Blueprint $table) {
+        Schema::create('down_times', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignUuid('id_mesin')->references('id')->on('maintenances');
-            $table->string('jangka_waktu');
-            $table->integer('severity')->default(0);
-            $table->integer('occurrence')->default(0);
-            $table->float('result_rbm')->default(0);
-            $table->string('risk');
-            $table->string('rekomendasi');
+            $table->foreignUuid('id_perhitungan')->references('id')->on('perhitungan_oee');
+            $table->string('jenis_downtime');
+            $table->time('jam_mulai_downtime');
+            $table->time('jam_selesai_downtime');
+            $table->integer('jumlah_downtime');
             $table->timestamps();
         });
     }
@@ -33,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('rbms');
+        Schema::dropIfExists('down_times');
     }
 };

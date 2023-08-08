@@ -6,8 +6,8 @@
         <div class="card border-0 shadow-sm px-2">
             <div class="card-body">
                 <div class="row justify-content-between align-items-center">
-                    <div class="col-md-4">
-                        <h2 class="fw-bold text-dark-blue">Ringkasan OEE</h2>
+                    <div class="col-md-5">
+                        <h2 class="fw-bold text-dark-blue">Ringkasan Downtime</h2>
                         <p class="text-dark-blue fw-medium">Ringkasan Maintenance</p>
                     </div>
                     <div class="col-md-auto">
@@ -18,9 +18,50 @@
         </div>
     </div>
     <div class="col-md-12 mt-3">
+        <div class="card">
+            <div class="card-body">
+                @php
+                $dateRange = explode(' - ', $tanggal);
+                if (count($dateRange) === 2) {
+                $startDate = $dateRange[0];
+                $endDate = $dateRange[1];
+                }
+                @endphp
+                @if ($nama_mesin && $tanggal)
+                <h5 class="text-dark-blue">Riwayat Downtime {{ $nama_mesin }} selama {{
+                    \App\Helpers\DateHelper::getIndonesiaDate($startDate) }} - {{
+                    \App\Helpers\DateHelper::getIndonesiaDate($endDate) }}</h5>
+                @elseif ($nama_mesin)
+                <h5 class="text-dark-blue">Riwayat Downtime {{ $nama_mesin }}</h5>
+                @elseif($tanggal)
+                Riwayat Downtime selama {{
+                \App\Helpers\DateHelper::getIndonesiaDate($startDate) }} - {{
+                \App\Helpers\DateHelper::getIndonesiaDate($endDate) }}
+                @else
+                <h5 class="text-dark-blue">Riwayat Downtime Selama 1 Bulan Terakhir</h5>
+                @endif
+
+                <div class="row justify-content-center">
+                    <div class="col-md-8 ">
+                        <canvas id="myChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12 mt-3">
+        @if ($errors->any())
+        <div class="alert alert-danger" role="alert">
+            <ol>
+                @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+                @endforeach
+            </ol>
+        </div>
+        @endif
         <div class="card border-0 shadow-sm">
             <div class="card-body">
-                <h5 class="text-dark-blue">Riwayat Data Maintenance Baru</h5>
+                <h5 class="text-dark-blue">Riwayat Data Downtime Mesin</h5>
                 <form id="form-filter">
                     <div class="row mt-2 justify-content-between">
                         <div class="col-md-auto d-flex align-items-center">
@@ -32,9 +73,12 @@
                                     <x-select :options="$namaMesin" />
                                 </div>
                                 <div class="col-md-auto ">
-                                    <input name="tanggal" class="form-select custom-select" id="tanggal"
-                                        onchange="this.form.submit();" value="{{ old('tanggal', @$_GET['tanggal']) }}"
-                                        placeholder="Tanggal" data-date-range>
+                                    <div class="custom-select2">
+                                        <input name="tanggal" class="form-select custom-select" id="tanggal"
+                                            onchange="this.form.submit();"
+                                            value="{{ old('tanggal', @$_GET['tanggal']) }}" placeholder="Tanggal"
+                                            data-date-range>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -43,7 +87,7 @@
                                 <div class="col-md-8">
                                     <div class="input-group mb-3">
                                         <input type="search" id="search" name="search"
-                                            class="form-control form-control-sm " placeholder="Search.."
+                                            class="form-control form-control-sm " placeholder="Search..."
                                             value="{{ old('search', @$_GET['search']) }}"
                                             aria-label="Sizing example input">
                                         <button class="input-group-text "><i class="fa fa-search "
@@ -51,10 +95,8 @@
                                     </div>
                                 </div>
                                 <div class="col-md-4 ">
-                                    <div class="col-md-4 ">
-                                        <a data-bs-toggle="modal" data-bs-target="#exportModal" type="button"
-                                            class="btn btn-primary rounded">Cetak</a>
-                                    </div>
+                                    <a data-bs-toggle="modal" data-bs-target="#exportModal" type="button"
+                                        class="btn btn-primary rounded">Cetak</a>
                                 </div>
                             </div>
                         </div>
@@ -64,15 +106,13 @@
                     <table class="table mt-2">
                         <thead class=" border-bottom-2">
                             <tr>
-                                <th class="text-dark-blue" scope="col">No</th>
-                                <th class="text-dark-blue" scope="col">Tanggal</th>
-                                <th class="text-dark-blue" scope="col">Nama Mesin</th>
-                                <th class="text-dark-blue" scope="col">Peformance</th>
-                                <th class="text-dark-blue" scope="col">Quality</th>
-                                <th class="text-dark-blue" scope="col">Availbility</th>
-                                <th class="text-dark-blue" scope="col">Output</th>
-                                <th class="text-dark-blue" scope="col">Rekomendasi</th>
-                                <th class="text-dark-blue" scope="col">Action</th>
+                                <th class="text-dark-blue" style="white-space: nowrap" scope="col">No</th>
+                                <th class="text-dark-blue" style="white-space: nowrap" scope="col">Tanggal</th>
+                                <th class="text-dark-blue" style="white-space: nowrap" scope="col">Nama Mesin</th>
+                                <th class="text-dark-blue" style="white-space: nowrap" scope="col">Jenis Downtime</th>
+                                <th class="text-dark-blue" style="white-space: nowrap" scope="col">Lama Downtime</th>
+                                <th class="text-dark-blue" style="white-space: nowrap" scope="col">Downtime Terencana
+                                </th>
                             </tr>
                         </thead>
                         <tbody>
@@ -81,25 +121,9 @@
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ \App\Helpers\DateHelper::getIndonesiaDate($data->created_at) }}</td>
                                 <td>{{ $data->maintenance->nama_mesin }}</td>
-                                <td>{{ round($data->oee->performance) }}%</td>
-                                <td>{{ round($data->oee->quality) }}%</td>
-                                <td>{{ round($data->oee->avaibility) }}%</td>
-                                <td>{{ round($data->oee->result_oee) }}%</td>
-                                @if ($data->oee->status_oee === 'sudah baik')
-                                <td class="text-green">{{ ucwords($data->oee->status_oee) }}</td>
-                                @endif
-                                @if ($data->oee->status_oee === 'perlu pengecekan')
-                                <td class="text-danger">{{ ucwords($data->oee->status_oee) }}</td>
-                                @endif
-                                <td>
-                                    <button type="button" class="btn btn-danger btn-sm  btn-delete"
-                                        data-user-id="{{ $data->id }}"
-                                        data-username="{{ $data->maintenance->nama_mesin }}"
-                                        data-url="{{ route('calculator-oee.delete', $data->id_mesin) }}"
-                                        data-bs-toggle="modal" data-bs-target="#deleteModal">
-                                        <i class="fas fa-trash mr-1"></i>
-                                    </button>
-                                </td>
+                                <td>{{ $data->downtime->jenis_downtime}}</td>
+                                <td>{{ $data->downtime->jumlah_downtime }} Menit</td>
+                                <td>{{ $data->down_time_terencana}} Menit</td>
                             </tr>
                             @empty
                             <tr>
@@ -115,36 +139,14 @@
         </div>
     </div>
 </div>
-
-<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header bg-body-tertiary">
-                <h1 class="modal-title fs-5 fw-bold" id="exampleModalLabel">Hapus Data Oee</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <form id="deleteForm" method="POST">
-                @csrf
-                @method('delete')
-                <div class="modal-body">
-                    <p></p>
-                </div>
-                <div class="modal-footer bg-body-tertiary">
-                    <button type="button" class="btn" data-bs-dismiss="modal">Batal</button>
-                    <button type="submit" class="btn btn-danger">Hapus</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
 <div class="modal fade" id="exportModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header bg-body-tertiary">
-                <h1 class="modal-title fs-5 fw-bold" id="exampleModalLabel">Cetak Riwayat OEE</h1>
+                <h1 class="modal-title fs-5 fw-bold" id="exampleModalLabel">Cetak Riwayat Downtime</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form id="deleteForm" action="{{ route('calculator-oee.export') }}" method="POST">
+            <form id="deleteForm" action="{{ route('downtime.export') }}" method="POST">
                 @csrf
                 <div class="modal-body">
                     <div class="row">
@@ -185,9 +187,59 @@
 @section('script')
 <script>
     $(document).ready(function () {
+         // Ambil data dari PHP (diambil dari variabel $chartDataJson)
+         var chartData = {!! $chartDataJson !!};
+
+// Fungsi untuk menambahkan teks "menit" saat dihover pada tooltip
+function customTooltip(context) {
+    var label = context.dataset.label || '';
+
+    if (label) {
+        label += ': ';
+    }
+
+    if (context.parsed.y !== null) {
+        label += context.parsed.y + ' menit';
+    }
+
+    return label;
+}
+
+// Buat fungsi untuk menggambar chart
+function drawChart() {
+    let ctx = document.getElementById('myChart');
+    let chartData = {!! $chartDataJson !!};
+    let myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: chartData.map(data => data.label), // Menampilkan tanggal pada label
+            datasets: [{
+                label: 'Jumlah Downtime',
+                data: chartData.map(data => data.data),
+                borderWidth: 1
+            }]
+        },
+        options: {
+            aspectRatio: 9 / 6,
+            pointStyle: "circle",
+            pointBorderWidth: 15,
+        }
+    });
+
+}
+
+// Panggil fungsi untuk menggambar chart
+drawChart();
+
         $('#nama_mesin').select2({
                 width: '100%',
                 placeholder: 'Nama mesin',
+                allowClear: true,
+                class: "resolve"
+            });
+        $('#nama_mesin_filter').select2({
+                width: '100%',
+                placeholder: 'Masukkan Nama Mesin',
                 allowClear: true,
                 class: "resolve"
             });
