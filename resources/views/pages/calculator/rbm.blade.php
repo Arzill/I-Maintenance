@@ -215,52 +215,52 @@
                 risk = "Low";
                 recommendation = "Preventive Maintenance"
             }else if(severityValue == 2 && occurrenceValue == 1){
-                risk = "Medium";
-                recommendation = "Corrective Maintenance"
+                risk = "Low";
+                recommendation = "Preventive Maintenance"
             }else if(severityValue == 2 && occurrenceValue == 2){
-                risk = "Medium";
-                    recommendation = "Corrective Maintenance"
+                risk = "Low";
+                    recommendation = "Preventive Maintenance"
             }else if(severityValue == 2 && occurrenceValue == 3){
                 risk = "Low";
                 recommendation = "Preventive Maintenance";
             }else if(severityValue == 2 && occurrenceValue == 4){
-                risk = "Low";
+                risk = "Medium";
                 recommendation = "Preventive Maintenance";
             }else if(severityValue == 2 && occurrenceValue == 5){
-                risk = "Low";
+                risk = "Medium";
                     recommendation = "Preventive Maintenance";
             }else if(severityValue == 3 && occurrenceValue == 1){
-                risk = "High";
-                    recommendation = "Corrective Maintenance";
+                risk = "Low";
+                    recommendation = "Preventive Maintenance";
             }else if(severityValue == 3 && occurrenceValue == 2){
-                risk = "High";
-                    recommendation = "Corrective Maintenance";
+                risk = "Low";
+                    recommendation = "Preventive Maintenance";
             }else if(severityValue == 3 && occurrenceValue == 3){
                 risk = "Medium";
-                    recommendation = "Corrective Maintenance";
+                    recommendation = "Preventive Maintenance";
             }else if(severityValue == 3 && occurrenceValue == 4){
-                risk = "Low";
-                    recommendation = "Preventive Maintenance";
-            }else if(severityValue == 3 && occurrenceValue == 5){
-                risk = "Low";
-                    recommendation = "Preventive Maintenance";
-            }else if(severityValue == 4 && occurrenceValue == 1){
-                risk = "High";
-                    recommendation = "Corrective Maintenance";
-            }else if(severityValue == 4 && occurrenceValue == 2){
-                risk = "High";
-                    recommendation = "Corrective Maintenance"
-            }else if(severityValue == 4 && occurrenceValue == 3){
-                risk = "High";
-                    recommendation = "Corrective Maintenance"
-            }else if(severityValue == 4 && occurrenceValue == 4){
                 risk = "Medium";
                     recommendation = "Corrective Maintenance";
-            }else if(severityValue == 4 && occurrenceValue == 5){
+            }else if(severityValue == 3 && occurrenceValue == 5){
+                risk = "High";
+                    recommendation = "Preventive Maintenance";
+            }else if(severityValue == 4 && occurrenceValue == 1){
                 risk = "Low";
                     recommendation = "Preventive Maintenance";
-            }else if(severityValue == 5 && occurrenceValue == 1){
+            }else if(severityValue == 4 && occurrenceValue == 2){
+                risk = "Medium";
+                    recommendation = "Preventive Maintenance"
+            }else if(severityValue == 4 && occurrenceValue == 3){
+                risk = "Medium";
+                    recommendation = "Corrective Maintenance"
+            }else if(severityValue == 4 && occurrenceValue == 4){
                 risk = "High";
+                    recommendation = "Corrective Maintenance";
+            }else if(severityValue == 4 && occurrenceValue == 5){
+                risk = "High";
+                    recommendation = "Corrective Maintenance";
+            }else if(severityValue == 5 && occurrenceValue == 1){
+                risk = "Medium";
                     recommendation = "Corrective Maintenance";
             }else if(severityValue == 5 && occurrenceValue == 2){
                 risk = "High";
@@ -272,7 +272,7 @@
                 risk = "High";
                     recommendation = "Corrective Maintenance";
             }else if(severityValue == 5 && occurrenceValue == 5){
-                risk = "Medium";
+                risk = "High";
                     recommendation = "Corrective Maintenance";
             }
         $("#result").text(rpnValue);
