@@ -56,7 +56,7 @@ class LccExport implements FromQuery, WithHeadings, WithMapping, WithTitle, Shou
         return [
             $this->number += 1,
             \App\Helpers\DateHelper::getIndonesiaDate($lcc->created_at),
-            $lcc->nama_mesin,
+            $lcc->maintenance->nama_mesin,
             "Rp " . round($lcc->biaya_inisiasi),
             "Rp " . round($lcc->biaya_operasional_tahunan),
             "Rp " . round($lcc->biaya_pemeliharaan_tahunan),
